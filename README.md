@@ -1,6 +1,6 @@
 # kj_amongus
 
-A new Flutter project.
+Quick Among Us in Real Life multiplayer game.
 
 ## Getting Started
 
