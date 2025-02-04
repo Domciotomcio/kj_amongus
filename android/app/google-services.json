@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "783180619104",
+    "project_id": "kj-amongus-10529",
+    "storage_bucket": "kj-amongus-10529.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:783180619104:android:88eb628d15538a61055205",
+        "android_client_info": {
+          "package_name": "com.example.kj_amongus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq18bzUo9Va0OMrs6Dous9VQaWZXUmDk4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
