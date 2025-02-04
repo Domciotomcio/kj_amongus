@@ -72,4 +72,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'kj-amongus-10529.firebasestorage.app',
     iosBundleId: 'com.example.kjAmongus',
   );
+
 }
