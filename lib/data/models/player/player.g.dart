@@ -10,7 +10,11 @@ _$PlayerImpl _$$PlayerImplFromJson(Map<String, dynamic> json) => _$PlayerImpl(
       id: json['id'] as String,
       nickname: json['nickname'] as String,
       name: json['name'] as String,
-      fraction: $enumDecode(_$FractionEnumMap, json['fraction']),
+      fraction: $enumDecodeNullable(_$FractionEnumMap, json['fraction']),
+      tasks: (json['tasks'] as List<dynamic>)
+          .map((e) => Task.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      isAlive: json['isAlive'] as bool,
     );
 
 Map<String, dynamic> _$$PlayerImplToJson(_$PlayerImpl instance) =>
@@ -18,7 +22,9 @@ Map<String, dynamic> _$$PlayerImplToJson(_$PlayerImpl instance) =>
       'id': instance.id,
       'nickname': instance.nickname,
       'name': instance.name,
-      'fraction': _$FractionEnumMap[instance.fraction]!,
+      'fraction': _$FractionEnumMap[instance.fraction],
+      'tasks': instance.tasks,
+      'isAlive': instance.isAlive,
     };
 
 const _$FractionEnumMap = {

@@ -23,7 +23,9 @@ mixin _$Player {
   String get id => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  Fraction get fraction => throw _privateConstructorUsedError;
+  Fraction? get fraction => throw _privateConstructorUsedError;
+  List<Task> get tasks => throw _privateConstructorUsedError;
+  bool get isAlive => throw _privateConstructorUsedError;
 
   /// Serializes this Player to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -39,7 +41,13 @@ abstract class $PlayerCopyWith<$Res> {
   factory $PlayerCopyWith(Player value, $Res Function(Player) then) =
       _$PlayerCopyWithImpl<$Res, Player>;
   @useResult
-  $Res call({String id, String nickname, String name, Fraction fraction});
+  $Res call(
+      {String id,
+      String nickname,
+      String name,
+      Fraction? fraction,
+      List<Task> tasks,
+      bool isAlive});
 }
 
 /// @nodoc
@@ -60,7 +68,9 @@ class _$PlayerCopyWithImpl<$Res, $Val extends Player>
     Object? id = null,
     Object? nickname = null,
     Object? name = null,
-    Object? fraction = null,
+    Object? fraction = freezed,
+    Object? tasks = null,
+    Object? isAlive = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -75,10 +85,18 @@ class _$PlayerCopyWithImpl<$Res, $Val extends Player>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      fraction: null == fraction
+      fraction: freezed == fraction
           ? _value.fraction
           : fraction // ignore: cast_nullable_to_non_nullable
-              as Fraction,
+              as Fraction?,
+      tasks: null == tasks
+          ? _value.tasks
+          : tasks // ignore: cast_nullable_to_non_nullable
+              as List<Task>,
+      isAlive: null == isAlive
+          ? _value.isAlive
+          : isAlive // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -90,7 +108,13 @@ abstract class _$$PlayerImplCopyWith<$Res> implements $PlayerCopyWith<$Res> {
       __$$PlayerImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String nickname, String name, Fraction fraction});
+  $Res call(
+      {String id,
+      String nickname,
+      String name,
+      Fraction? fraction,
+      List<Task> tasks,
+      bool isAlive});
 }
 
 /// @nodoc
@@ -109,7 +133,9 @@ class __$$PlayerImplCopyWithImpl<$Res>
     Object? id = null,
     Object? nickname = null,
     Object? name = null,
-    Object? fraction = null,
+    Object? fraction = freezed,
+    Object? tasks = null,
+    Object? isAlive = null,
   }) {
     return _then(_$PlayerImpl(
       id: null == id
@@ -124,10 +150,18 @@ class __$$PlayerImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      fraction: null == fraction
+      fraction: freezed == fraction
           ? _value.fraction
           : fraction // ignore: cast_nullable_to_non_nullable
-              as Fraction,
+              as Fraction?,
+      tasks: null == tasks
+          ? _value._tasks
+          : tasks // ignore: cast_nullable_to_non_nullable
+              as List<Task>,
+      isAlive: null == isAlive
+          ? _value.isAlive
+          : isAlive // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -139,7 +173,10 @@ class _$PlayerImpl implements _Player {
       {required this.id,
       required this.nickname,
       required this.name,
-      required this.fraction});
+      this.fraction,
+      required final List<Task> tasks,
+      required this.isAlive})
+      : _tasks = tasks;
 
   factory _$PlayerImpl.fromJson(Map<String, dynamic> json) =>
       _$$PlayerImplFromJson(json);
@@ -151,11 +188,21 @@ class _$PlayerImpl implements _Player {
   @override
   final String name;
   @override
-  final Fraction fraction;
+  final Fraction? fraction;
+  final List<Task> _tasks;
+  @override
+  List<Task> get tasks {
+    if (_tasks is EqualUnmodifiableListView) return _tasks;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_tasks);
+  }
+
+  @override
+  final bool isAlive;
 
   @override
   String toString() {
-    return 'Player(id: $id, nickname: $nickname, name: $name, fraction: $fraction)';
+    return 'Player(id: $id, nickname: $nickname, name: $name, fraction: $fraction, tasks: $tasks, isAlive: $isAlive)';
   }
 
   @override
@@ -168,12 +215,15 @@ class _$PlayerImpl implements _Player {
                 other.nickname == nickname) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.fraction, fraction) ||
-                other.fraction == fraction));
+                other.fraction == fraction) &&
+            const DeepCollectionEquality().equals(other._tasks, _tasks) &&
+            (identical(other.isAlive, isAlive) || other.isAlive == isAlive));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, nickname, name, fraction);
+  int get hashCode => Object.hash(runtimeType, id, nickname, name, fraction,
+      const DeepCollectionEquality().hash(_tasks), isAlive);
 
   /// Create a copy of Player
   /// with the given fields replaced by the non-null parameter values.
@@ -196,7 +246,9 @@ abstract class _Player implements Player {
       {required final String id,
       required final String nickname,
       required final String name,
-      required final Fraction fraction}) = _$PlayerImpl;
+      final Fraction? fraction,
+      required final List<Task> tasks,
+      required final bool isAlive}) = _$PlayerImpl;
 
   factory _Player.fromJson(Map<String, dynamic> json) = _$PlayerImpl.fromJson;
 
@@ -207,7 +259,11 @@ abstract class _Player implements Player {
   @override
   String get name;
   @override
-  Fraction get fraction;
+  Fraction? get fraction;
+  @override
+  List<Task> get tasks;
+  @override
+  bool get isAlive;
 
   /// Create a copy of Player
   /// with the given fields replaced by the non-null parameter values.

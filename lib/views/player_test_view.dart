@@ -35,9 +35,12 @@ class PlayerTestView extends StatelessWidget {
                         itemBuilder: (context, index) {
                           final player = players[index];
                           return ListTile(
-                            title: Text(player.nickname),
-                            subtitle: Text(player.name),
-                            trailing: Text(player.fraction.name),
+                            title: Text(
+                                "${player.nickname} ${player.name} ${player.id}"),
+                            subtitle: Text(player.tasks.toString()),
+                            trailing: player.fraction != null
+                                ? Text(player.fraction!.name)
+                                : null,
                           );
                         },
                       );
@@ -59,6 +62,14 @@ class PlayerTestView extends StatelessWidget {
                   playerService.removeAllPlayers();
                 },
                 child: Text("Remove All Players")),
+            FilledButton(
+                onPressed: () {
+                  // add tasks to all players
+                  playerService.addTasksToPlayers();
+                },
+                child: Text("Add Tasks to Players")),
+            Divider(),
+            ElevatedButton(onPressed: null, child: Text("Start Game")),
           ],
         ),
       ),
