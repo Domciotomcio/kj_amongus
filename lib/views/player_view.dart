@@ -68,6 +68,7 @@ class PlayerView extends StatelessWidget {
                       "Nie żyjesz",
                       style: TextStyle(color: Colors.red),
                     ),
+              subtitle: Text("Pamiętaj, by zrealizować wszystkie zadania"),
             ),
             Divider(),
             Text("Twoje zadania"),

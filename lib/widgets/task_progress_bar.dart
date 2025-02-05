@@ -26,7 +26,7 @@ class TaskProgressBar extends StatelessWidget {
               children: [
                 Text("Postęp zadań"),
                 Text(
-                    "Liczba zrobionych tasków ${game.completedTasksNumber}/${game.allTasksNumber}"),
+                    "Liczba zrobionych tasków przez wszystkich graczy ${game.completedTasksNumber}/${game.allTasksNumber}"),
                 LinearProgressIndicator(
                   value: game.completedTasksNumber / game.allTasksNumber,
                 ),
