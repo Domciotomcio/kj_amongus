@@ -168,7 +168,7 @@ class __$$PlayerImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$PlayerImpl implements _Player {
+class _$PlayerImpl extends _Player {
   const _$PlayerImpl(
       {required this.id,
       required this.nickname,
@@ -176,7 +176,8 @@ class _$PlayerImpl implements _Player {
       this.fraction,
       required final List<Task> tasks,
       required this.isAlive})
-      : _tasks = tasks;
+      : _tasks = tasks,
+        super._();
 
   factory _$PlayerImpl.fromJson(Map<String, dynamic> json) =>
       _$$PlayerImplFromJson(json);
@@ -241,7 +242,7 @@ class _$PlayerImpl implements _Player {
   }
 }
 
-abstract class _Player implements Player {
+abstract class _Player extends Player {
   const factory _Player(
       {required final String id,
       required final String nickname,
@@ -249,6 +250,7 @@ abstract class _Player implements Player {
       final Fraction? fraction,
       required final List<Task> tasks,
       required final bool isAlive}) = _$PlayerImpl;
+  const _Player._() : super._();
 
   factory _Player.fromJson(Map<String, dynamic> json) = _$PlayerImpl.fromJson;
 

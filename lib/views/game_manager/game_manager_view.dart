@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kj_amongus/services/game_service.dart';
 import 'package:kj_amongus/services/player_service.dart';
+import 'package:kj_amongus/views/game_manager/game_manager_player_view.dart';
 
 class GameView extends StatelessWidget {
   final GameService gameService = GameService();
@@ -61,13 +62,17 @@ class GameView extends StatelessWidget {
                       itemBuilder: (context, index) {
                         final player = players[index];
                         return ListTile(
-                          title: Text("${player.nickname}"),
-                          subtitle: Text(
-                              "Czy dalej zyje - ${player.isAlive.toString()}"),
-                          trailing: player.fraction != null
-                              ? Text(player.fraction!.name)
-                              : null,
-                        );
+                            title: Text("${player.nickname}"),
+                            subtitle: Text(
+                                "Czy dalej zyje - ${player.isAlive.toString()}"),
+                            trailing: player.fraction != null
+                                ? Text(player.fraction!.name)
+                                : null,
+                            onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => GameManagerPlayerView(
+                                        playerId: player.id))));
                       },
                     );
                   } else {

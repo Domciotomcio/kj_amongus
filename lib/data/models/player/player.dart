@@ -14,8 +14,13 @@ class Player with _$Player {
     Fraction? fraction,
     required List<Task> tasks,
     required bool isAlive,
-
   }) = _Player;
 
   factory Player.fromJson(Map<String, dynamic> json) => _$PlayerFromJson(json);
+
+  const Player._();
+
+  bool isAllTasksDone() {
+    return tasks.every((task) => task.isDone);
+  }
 }

@@ -24,6 +24,12 @@ class PlayerService {
     await _firestore.collection('players').doc(id).set(player.toJson());
   }
 
+  Stream<Player> getPlayerStream(String id) {
+    return _firestore.collection('players').doc(id).snapshots().map((snapshot) {
+      return Player.fromJson(snapshot.data()!);
+    });
+  }
+
   Stream<List<Player>> getPlayersStream() {
     return _firestore.collection('players').snapshots().map((snapshot) {
       return snapshot.docs.map((doc) {
