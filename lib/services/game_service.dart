@@ -23,4 +23,16 @@ class GameService {
       return false;
     }
   }
+
+  Future<void> startEmergencyMeeting() async {
+    await _firestore.collection('games').doc('1').update({
+      'isEmergencyMeeting': true,
+      'emergencyMeetingStartedAt': DateTime.now()
+    });
+  }
+
+  Future<void> endEmergencyMeeting() async {
+    await _firestore.collection('games').doc('1').update(
+        {'isEmergencyMeeting': false, 'emergencyMeetingStartedAt': null});
+  }
 }

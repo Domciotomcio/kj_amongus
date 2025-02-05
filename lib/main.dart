@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kj_amongus/firebase_options.dart';
 import 'package:kj_amongus/views/game_manager/game_manager_view.dart';
 import 'package:kj_amongus/views/player_test_view.dart';
+import 'package:kj_amongus/views/player_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +26,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       //home: PlayerTestView(),
-      home: GameView(),
+      // home: GameView(),
+      home: PlayerView(),
     );
   }
 }

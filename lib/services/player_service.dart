@@ -4,6 +4,7 @@ import 'package:kj_amongus/constants/task_templates.dart';
 import 'package:kj_amongus/data/models/player/player.dart';
 import 'package:kj_amongus/data/models/task/task.dart';
 import 'package:kj_amongus/data/models/task/task_template.dart';
+import 'package:kj_amongus/services/game_service.dart';
 import 'package:uuid/uuid.dart';
 
 class PlayerService {
@@ -66,5 +67,16 @@ class PlayerService {
         'tasks': FieldValue.arrayUnion(tasks.map((e) => e.toJson()).toList())
       });
     }
+  }
+
+  Future<void> killPlayer(String playerId) async {
+    await _firestore.collection('players').doc(playerId).update({
+      'isAlive': false,
+    });
+  }
+
+  Future<void> reportBody(String playerId) async {
+    final GameService gameService = GameService();
+    await gameService.startEmergencyMeeting();
   }
 }
