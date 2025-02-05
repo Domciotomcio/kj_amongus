@@ -89,5 +89,9 @@ class PlayerService {
     await _firestore.collection('players').doc(playerId).update({
       'tasks': tasks,
     });
+
+    // recalculate tasks for game
+    final gameService = GameService();
+    await gameService.recalculateTasks();
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kj_amongus/data/models/fraction/fraction.dart';
 import 'package:kj_amongus/data/models/player/player.dart';
 import 'package:kj_amongus/services/player_service.dart';
+import 'package:kj_amongus/widgets/task_progress_bar.dart';
 
 class PlayerView extends StatelessWidget {
   final PlayerService playerService = PlayerService();
@@ -39,6 +40,7 @@ class PlayerView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            TaskProgressBar(),
             Text("Załoga"),
             if (player.fraction == Fraction.red)
               Text("Jesteś impostorem")

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kj_amongus/data/models/game/game.dart';
+import 'package:kj_amongus/data/models/task/task.dart';
 
 class GameService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -34,5 +35,23 @@ class GameService {
   Future<void> endEmergencyMeeting() async {
     await _firestore.collection('games').doc('1').update(
         {'isEmergencyMeeting': false, 'emergencyMeetingStartedAt': null});
+  }
+
+  Future<void> recalculateTasks() async {
+    // go through all players and recalculate completedTasksNumber
+    final players = await _firestore.collection('players').get();
+    final List<Task> allTasks = [];
+    for (final player in players.docs) {
+      final tasks = player.data()['tasks'] as List;
+      allTasks.addAll(tasks.map((task) => Task.fromJson(task)));
+    }
+
+    final allTasksNumber = allTasks.length;
+    final completedTasksNumber = allTasks.where((task) => task.isDone).length;
+
+    await _firestore.collection('games').doc('1').update({
+      'allTasksNumber': allTasksNumber,
+      'completedTasksNumber': completedTasksNumber
+    });
   }
 }
