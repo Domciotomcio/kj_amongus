@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:kj_amongus/data/models/fraction/fraction.dart';
 import 'package:kj_amongus/data/models/player/player.dart';
+import 'package:kj_amongus/services/game_service.dart';
 import 'package:kj_amongus/services/player_service.dart';
+import 'package:kj_amongus/views/player/player_finish_view.dart';
 import 'package:kj_amongus/widgets/task_progress_bar.dart';
 
 class PlayerView extends StatelessWidget {
   final PlayerService playerService = PlayerService();
+  final GameService gameService = GameService();
   final Player player;
 
   PlayerView({Key? key, required this.player}) : super(key: key);
@@ -13,23 +16,38 @@ class PlayerView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-        stream: playerService
-            .getPlayerStream("15e08068-3032-41f5-8a82-5495d84ec82f"),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return CircularProgressIndicator(); // Show loading indicator
+        stream: gameService.getGameStream(),
+        builder: (context, gameSnapshot) {
+          // Finish Game
+          if (gameSnapshot.hasData && gameSnapshot.data!.isFinished) {
+            // 🚀 Automatically navigate to PlayerView when game finishes
+            WidgetsBinding.instance.addPostFrameCallback((_) async {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => PlayerFinishView()),
+                  (route) => false);
+            });
           }
 
-          if (snapshot.hasError) {
-            return Text('Error: ${snapshot.error}');
-          }
+          return StreamBuilder(
+              stream: playerService
+                  .getPlayerStream("15e08068-3032-41f5-8a82-5495d84ec82f"),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator(); // Show loading indicator
+                }
 
-          if (snapshot.hasData) {
-            final player = snapshot.data as Player;
-            return Body(player);
-          } else {
-            return Text("Idk what happened");
-          }
+                if (snapshot.hasError) {
+                  return Text('Error: ${snapshot.error}');
+                }
+
+                if (snapshot.hasData) {
+                  final player = snapshot.data as Player;
+                  return Body(player);
+                } else {
+                  return Text("Idk what happened");
+                }
+              });
         });
   }
 
