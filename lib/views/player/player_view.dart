@@ -6,6 +6,9 @@ import 'package:kj_amongus/widgets/task_progress_bar.dart';
 
 class PlayerView extends StatelessWidget {
   final PlayerService playerService = PlayerService();
+  final Player player;
+
+  PlayerView({Key? key, required this.player}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

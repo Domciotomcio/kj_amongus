@@ -10,14 +10,13 @@ import 'package:uuid/uuid.dart';
 class PlayerService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<void> createPlayer(
-      String nickname, String name, String fraction) async {
+  Future<void> createPlayer(String nickname, String name) async {
     final id = Uuid().v4();
 
     final player = Player(
         id: id,
-        nickname: "adam213",
-        name: "adam",
+        nickname: nickname,
+        name: name,
         tasks: [],
         isAlive: true,
         fraction: null);
@@ -31,12 +30,26 @@ class PlayerService {
     });
   }
 
+  Future<Player> getPlayerByNickname(String nickname) async {
+    final players = await _firestore.collection('players').get();
+    final player = players.docs.firstWhere(
+        (player) => player.data()['nickname'] == nickname,
+        orElse: () => throw Exception('Player not found'));
+
+    return Player.fromJson(player.data());
+  }
+
   Stream<List<Player>> getPlayersStream() {
     return _firestore.collection('players').snapshots().map((snapshot) {
       return snapshot.docs.map((doc) {
         return Player.fromJson(doc.data());
       }).toList();
     });
+  }
+
+  Future<bool> isPlayerExists(String nickname) async {
+    final players = await _firestore.collection('players').get();
+    return players.docs.any((player) => player.data()['nickname'] == nickname);
   }
 
   Future<void> removeAllPlayers() async {

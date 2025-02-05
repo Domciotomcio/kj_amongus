@@ -52,7 +52,7 @@ class PlayerTestView extends StatelessWidget {
             FilledButton(
                 onPressed: () {
                   // add player to firebase
-                  playerService.createPlayer('nickname', 'name', 'blue');
+                  playerService.createPlayer('nickname', 'name');
                   print("SIEMA");
                 },
                 child: Text("Add Player")),

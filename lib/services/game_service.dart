@@ -37,6 +37,11 @@ class GameService {
         {'isEmergencyMeeting': false, 'emergencyMeetingStartedAt': null});
   }
 
+  Future<bool> isGameStarted() async {
+    final game = await _firestore.collection('games').doc('1').get();
+    return game.data()!['isStarted'];
+  }
+
   Future<void> recalculateTasks() async {
     // go through all players and recalculate completedTasksNumber
     final players = await _firestore.collection('players').get();

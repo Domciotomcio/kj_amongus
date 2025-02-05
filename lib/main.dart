@@ -2,8 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:kj_amongus/firebase_options.dart';
 import 'package:kj_amongus/views/game_manager/game_manager_view.dart';
+import 'package:kj_amongus/views/player/player_join_game_view.dart';
 import 'package:kj_amongus/views/player_test_view.dart';
-import 'package:kj_amongus/views/player_view.dart';
+import 'package:kj_amongus/views/player/player_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +28,8 @@ class MyApp extends StatelessWidget {
       ),
       //home: PlayerTestView(),
       // home: GameView(),
-      home: PlayerView(),
+      // home: PlayerView(),
+      home: PlayerJoinGameView(),
     );
   }
 }
