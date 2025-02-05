@@ -18,13 +18,47 @@ class PlayerTestView extends StatelessWidget {
             Text(
               'Player Test View',
             ),
+            Expanded(
+              child: StreamBuilder(
+                  stream: playerService.getPlayersStream(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator(); // Show loading indicator
+                    }
+                    if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    }
+                    if (snapshot.hasData) {
+                      final players = snapshot.data as List<Player>;
+                      return ListView.builder(
+                        itemCount: players.length,
+                        itemBuilder: (context, index) {
+                          final player = players[index];
+                          return ListTile(
+                            title: Text(player.nickname),
+                            subtitle: Text(player.name),
+                            trailing: Text(player.fraction.name),
+                          );
+                        },
+                      );
+                    } else {
+                      return Text("Idk what happened");
+                    }
+                  }),
+            ),
             FilledButton(
                 onPressed: () {
                   // add player to firebase
-                  playerService.createPlayer('nickname', 'name', 'fraction');
+                  playerService.createPlayer('nickname', 'name', 'blue');
                   print("SIEMA");
                 },
                 child: Text("Add Player")),
+            FilledButton(
+                onPressed: () {
+                  // remove all the players
+                  playerService.removeAllPlayers();
+                },
+                child: Text("Remove All Players")),
           ],
         ),
       ),
