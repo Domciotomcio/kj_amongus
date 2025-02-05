@@ -79,4 +79,15 @@ class PlayerService {
     final GameService gameService = GameService();
     await gameService.startEmergencyMeeting();
   }
+
+  Future<void> completeTask(String playerId, String taskId) async {
+    final player = await _firestore.collection('players').doc(playerId).get();
+    final tasks = player.data()!['tasks'] as List<dynamic>;
+    final taskIndex = tasks.indexWhere((task) => task['id'] == taskId);
+    tasks[taskIndex]['isDone'] = true;
+
+    await _firestore.collection('players').doc(playerId).update({
+      'tasks': tasks,
+    });
+  }
 }
