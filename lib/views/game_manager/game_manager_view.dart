@@ -48,10 +48,7 @@ class GameView extends StatelessWidget {
                           ),
                           Divider(),
                           Text("Stan gry"),
-                          Text("Czy gra się zaczęła - ${game.isStarted}"),
-                          Text("Czy gra się skończyła - ${game.isFinished}"),
-                          Text(
-                              "Czy jest emergency meeting - ${game.isEmergencyMeeting}"),
+                          Text(game.state.toString()),
                           Divider(),
                         ],
                       );

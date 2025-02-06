@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:kj_amongus/firebase_options.dart';
 import 'package:kj_amongus/views/game_manager/game_manager_view.dart';
 import 'package:kj_amongus/views/player/player_join_game_view.dart';
+import 'package:kj_amongus/views/player/player_view_manager.dart';
 import 'package:kj_amongus/views/player_test_view.dart';
 import 'package:kj_amongus/views/player/player_view.dart';
 import 'package:kj_amongus/views/test/test_view.dart';
@@ -57,8 +58,8 @@ class MyApp extends StatelessWidget {
       //home: PlayerTestView(),
       // home: GameView(),
       //home: PlayerView(),
-      home: PlayerJoinGameView(),
-      //home: TestView(),
+      //home: PlayerJoinGameView(),
+      home: PlayerViewManager(),
     );
   }
 }

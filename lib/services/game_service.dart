@@ -39,7 +39,7 @@ class GameService {
 
   Future<bool> isGameStarted() async {
     final game = await _firestore.collection('games').doc('1').get();
-    return game.data()!['isStarted'];
+    return game.data()!['state'] != 'lobby';
   }
 
   Future<void> recalculateTasks() async {

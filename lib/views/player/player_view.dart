@@ -6,12 +6,12 @@ import 'package:kj_amongus/services/player_service.dart';
 import 'package:kj_amongus/views/player/player_finish_view.dart';
 import 'package:kj_amongus/widgets/task_progress_bar.dart';
 
-class PlayerView extends StatelessWidget {
+class PlayerGameView extends StatelessWidget {
   final PlayerService playerService = PlayerService();
   final GameService gameService = GameService();
-  final Player player;
+  final String nickname;
 
-  PlayerView({Key? key, required this.player}) : super(key: key);
+  PlayerGameView({Key? key, required this.nickname}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +19,15 @@ class PlayerView extends StatelessWidget {
         stream: gameService.getGameStream(),
         builder: (context, gameSnapshot) {
           // Finish Game
-          if (gameSnapshot.hasData && gameSnapshot.data!.isFinished) {
-            // 🚀 Automatically navigate to PlayerView when game finishes
-            WidgetsBinding.instance.addPostFrameCallback((_) async {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => PlayerFinishView()),
-                  (route) => false);
-            });
-          }
+          // if (gameSnapshot.hasData && gameSnapshot.data!.isFinished) {
+          //   // 🚀 Automatically navigate to PlayerView when game finishes
+          //   WidgetsBinding.instance.addPostFrameCallback((_) async {
+          //     Navigator.pushAndRemoveUntil(
+          //         context,
+          //         MaterialPageRoute(builder: (context) => PlayerFinishView()),
+          //         (route) => false);
+          //   });
+          // }
 
           return StreamBuilder(
               stream: playerService

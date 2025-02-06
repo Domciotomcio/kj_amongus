@@ -4,6 +4,7 @@ import 'package:kj_amongus/services/game_service.dart';
 import 'package:kj_amongus/services/player_service.dart';
 import 'package:kj_amongus/views/player/player_lobby_view.dart';
 import 'package:kj_amongus/views/player/player_view.dart';
+import 'package:kj_amongus/views/player/player_view_manager.dart';
 
 class PlayerJoinGameView extends StatelessWidget {
   final PlayerService playerService = PlayerService();
@@ -48,50 +49,26 @@ class PlayerJoinGameView extends StatelessWidget {
                       .isPlayerExists(nicknameController.text);
 
                   // if is game started, then try to find player with this nickname and go to player_view
-                  if (isGameStarted) {
-                    if (!isPlayerExists) {
-                      // error, player not found
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content:
-                              Text('Nie znaleziono gracza o podanym nicku')));
-                    } else {
-                      // player found, go to player_view
-                      final player = await playerService
-                          .getPlayerByNickname(nicknameController.text);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PlayerView(
-                                    player: player,
-                                  )));
-                    }
+
+                  if (isGameStarted && !isPlayerExists) {
+                    // error, game started, but player not found
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content:
+                            Text('Nie znaleziono gracza o podanym nicku')));
                   }
 
-                  // if game not started yet, create user with this id and go to player_lobby_view
-                  if (!isGameStarted) {
-                    if (isPlayerExists) {
-                      // player found, go to player_lobby_view
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PlayerLobbyView(
-                                  nickname: nicknameController.text)));
-                    } else {
-                      // player not found, create new player
-                      await playerService.createPlayer(
-                          nicknameController.text, nameController.text);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => PlayerLobbyView(
-                                  nickname: nicknameController.text)));
-                    }
+                  if (!isPlayerExists) {
+                    // player not found, create new player
+                    await playerService.createPlayer(
+                        nicknameController.text, nameController.text);
                   }
-                  Navigator.push(
+
+                  Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => PlayerLobbyView(
-                              nickname: nicknameController.text)));
+                          builder: (context) => PlayerViewManager(
+                              nickname: nicknameController.text)),
+                      (route) => false);
                 },
                 child: Text('Dołącz do gry'),
               ),

@@ -19,17 +19,17 @@ class PlayerLobbyView extends StatelessWidget {
         stream: gameService.getGameStream(),
         builder: (context, gameSnapshot) {
           // Start Game
-          if (gameSnapshot.hasData && gameSnapshot.data!.isStarted) {
-            // 🚀 Automatically navigate to PlayerView when game starts
-            WidgetsBinding.instance.addPostFrameCallback((_) async {
-              final player = await playerService.getPlayerByNickname(nickname);
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => PlayerView(player: player)),
-              );
-            });
-          }
+          // if (gameSnapshot.hasData && gameSnapshot.data!.isStarted) {
+          //   // 🚀 Automatically navigate to PlayerView when game starts
+          //   WidgetsBinding.instance.addPostFrameCallback((_) async {
+          //     final player = await playerService.getPlayerByNickname(nickname);
+          //     Navigator.pushReplacement(
+          //       context,
+          //       MaterialPageRoute(
+          //           builder: (context) => PlayerView(player: player)),
+          //     );
+          //   });
+          // }
 
           return Scaffold(
             appBar: AppBar(

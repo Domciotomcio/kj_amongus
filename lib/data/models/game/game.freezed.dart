@@ -22,9 +22,7 @@ Game _$GameFromJson(Map<String, dynamic> json) {
 mixin _$Game {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  bool get isStarted => throw _privateConstructorUsedError;
-  bool get isFinished => throw _privateConstructorUsedError;
-  bool get isEmergencyMeeting => throw _privateConstructorUsedError;
+  GameState get state => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime? get emergencyMeetingStartedAt => throw _privateConstructorUsedError;
   int get playersNumber => throw _privateConstructorUsedError;
@@ -48,9 +46,7 @@ abstract class $GameCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      bool isStarted,
-      bool isFinished,
-      bool isEmergencyMeeting,
+      GameState state,
       @TimestampConverter() DateTime? emergencyMeetingStartedAt,
       int playersNumber,
       int allTasksNumber,
@@ -74,9 +70,7 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? isStarted = null,
-    Object? isFinished = null,
-    Object? isEmergencyMeeting = null,
+    Object? state = null,
     Object? emergencyMeetingStartedAt = freezed,
     Object? playersNumber = null,
     Object? allTasksNumber = null,
@@ -91,18 +85,10 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      isStarted: null == isStarted
-          ? _value.isStarted
-          : isStarted // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFinished: null == isFinished
-          ? _value.isFinished
-          : isFinished // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isEmergencyMeeting: null == isEmergencyMeeting
-          ? _value.isEmergencyMeeting
-          : isEmergencyMeeting // ignore: cast_nullable_to_non_nullable
-              as bool,
+      state: null == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as GameState,
       emergencyMeetingStartedAt: freezed == emergencyMeetingStartedAt
           ? _value.emergencyMeetingStartedAt
           : emergencyMeetingStartedAt // ignore: cast_nullable_to_non_nullable
@@ -133,9 +119,7 @@ abstract class _$$GameImplCopyWith<$Res> implements $GameCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      bool isStarted,
-      bool isFinished,
-      bool isEmergencyMeeting,
+      GameState state,
       @TimestampConverter() DateTime? emergencyMeetingStartedAt,
       int playersNumber,
       int allTasksNumber,
@@ -156,9 +140,7 @@ class __$$GameImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? isStarted = null,
-    Object? isFinished = null,
-    Object? isEmergencyMeeting = null,
+    Object? state = null,
     Object? emergencyMeetingStartedAt = freezed,
     Object? playersNumber = null,
     Object? allTasksNumber = null,
@@ -173,18 +155,10 @@ class __$$GameImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      isStarted: null == isStarted
-          ? _value.isStarted
-          : isStarted // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isFinished: null == isFinished
-          ? _value.isFinished
-          : isFinished // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isEmergencyMeeting: null == isEmergencyMeeting
-          ? _value.isEmergencyMeeting
-          : isEmergencyMeeting // ignore: cast_nullable_to_non_nullable
-              as bool,
+      state: null == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as GameState,
       emergencyMeetingStartedAt: freezed == emergencyMeetingStartedAt
           ? _value.emergencyMeetingStartedAt
           : emergencyMeetingStartedAt // ignore: cast_nullable_to_non_nullable
@@ -211,9 +185,7 @@ class _$GameImpl implements _Game {
   const _$GameImpl(
       {required this.id,
       required this.name,
-      required this.isStarted,
-      required this.isFinished,
-      required this.isEmergencyMeeting,
+      required this.state,
       @TimestampConverter() this.emergencyMeetingStartedAt,
       required this.playersNumber,
       required this.allTasksNumber,
@@ -227,11 +199,7 @@ class _$GameImpl implements _Game {
   @override
   final String name;
   @override
-  final bool isStarted;
-  @override
-  final bool isFinished;
-  @override
-  final bool isEmergencyMeeting;
+  final GameState state;
   @override
   @TimestampConverter()
   final DateTime? emergencyMeetingStartedAt;
@@ -244,7 +212,7 @@ class _$GameImpl implements _Game {
 
   @override
   String toString() {
-    return 'Game(id: $id, name: $name, isStarted: $isStarted, isFinished: $isFinished, isEmergencyMeeting: $isEmergencyMeeting, emergencyMeetingStartedAt: $emergencyMeetingStartedAt, playersNumber: $playersNumber, allTasksNumber: $allTasksNumber, completedTasksNumber: $completedTasksNumber)';
+    return 'Game(id: $id, name: $name, state: $state, emergencyMeetingStartedAt: $emergencyMeetingStartedAt, playersNumber: $playersNumber, allTasksNumber: $allTasksNumber, completedTasksNumber: $completedTasksNumber)';
   }
 
   @override
@@ -254,12 +222,7 @@ class _$GameImpl implements _Game {
             other is _$GameImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.isStarted, isStarted) ||
-                other.isStarted == isStarted) &&
-            (identical(other.isFinished, isFinished) ||
-                other.isFinished == isFinished) &&
-            (identical(other.isEmergencyMeeting, isEmergencyMeeting) ||
-                other.isEmergencyMeeting == isEmergencyMeeting) &&
+            (identical(other.state, state) || other.state == state) &&
             (identical(other.emergencyMeetingStartedAt,
                     emergencyMeetingStartedAt) ||
                 other.emergencyMeetingStartedAt == emergencyMeetingStartedAt) &&
@@ -277,9 +240,7 @@ class _$GameImpl implements _Game {
       runtimeType,
       id,
       name,
-      isStarted,
-      isFinished,
-      isEmergencyMeeting,
+      state,
       emergencyMeetingStartedAt,
       playersNumber,
       allTasksNumber,
@@ -305,9 +266,7 @@ abstract class _Game implements Game {
   const factory _Game(
       {required final String id,
       required final String name,
-      required final bool isStarted,
-      required final bool isFinished,
-      required final bool isEmergencyMeeting,
+      required final GameState state,
       @TimestampConverter() final DateTime? emergencyMeetingStartedAt,
       required final int playersNumber,
       required final int allTasksNumber,
@@ -320,11 +279,7 @@ abstract class _Game implements Game {
   @override
   String get name;
   @override
-  bool get isStarted;
-  @override
-  bool get isFinished;
-  @override
-  bool get isEmergencyMeeting;
+  GameState get state;
   @override
   @TimestampConverter()
   DateTime? get emergencyMeetingStartedAt;

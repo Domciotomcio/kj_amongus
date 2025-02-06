@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class PlayerFinishView extends StatelessWidget {
+class PlayerGameOverView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

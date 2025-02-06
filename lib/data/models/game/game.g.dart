@@ -9,9 +9,7 @@ part of 'game.dart';
 _$GameImpl _$$GameImplFromJson(Map<String, dynamic> json) => _$GameImpl(
       id: json['id'] as String,
       name: json['name'] as String,
-      isStarted: json['isStarted'] as bool,
-      isFinished: json['isFinished'] as bool,
-      isEmergencyMeeting: json['isEmergencyMeeting'] as bool,
+      state: $enumDecode(_$GameStateEnumMap, json['state']),
       emergencyMeetingStartedAt: _$JsonConverterFromJson<Timestamp, DateTime>(
           json['emergencyMeetingStartedAt'],
           const TimestampConverter().fromJson),
@@ -24,9 +22,7 @@ Map<String, dynamic> _$$GameImplToJson(_$GameImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'isStarted': instance.isStarted,
-      'isFinished': instance.isFinished,
-      'isEmergencyMeeting': instance.isEmergencyMeeting,
+      'state': _$GameStateEnumMap[instance.state]!,
       'emergencyMeetingStartedAt': _$JsonConverterToJson<Timestamp, DateTime>(
           instance.emergencyMeetingStartedAt,
           const TimestampConverter().toJson),
@@ -34,6 +30,13 @@ Map<String, dynamic> _$$GameImplToJson(_$GameImpl instance) =>
       'allTasksNumber': instance.allTasksNumber,
       'completedTasksNumber': instance.completedTasksNumber,
     };
+
+const _$GameStateEnumMap = {
+  GameState.lobby: 'lobby',
+  GameState.game: 'game',
+  GameState.emergencyMeeting: 'emergencyMeeting',
+  GameState.gameOver: 'gameOver',
+};
 
 Value? _$JsonConverterFromJson<Json, Value>(
   Object? json,
