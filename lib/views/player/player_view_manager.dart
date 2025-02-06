@@ -13,7 +13,7 @@ class PlayerViewManager extends StatelessWidget {
   final PlayerService playerService = PlayerService();
   final String nickname = "Domcio";
 
-  PlayerViewManager({super.key, nickname}); // Later from join game view
+  PlayerViewManager({super.key}); // Later from join game view
 
   @override
   Widget build(BuildContext context) {

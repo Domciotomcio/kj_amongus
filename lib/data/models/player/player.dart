@@ -23,4 +23,8 @@ class Player with _$Player {
   bool isAllTasksDone() {
     return tasks.every((task) => task.isDone);
   }
+
+  bool isImpostor() {
+    return fraction == Fraction.red;
+  }
 }

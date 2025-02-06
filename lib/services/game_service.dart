@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kj_amongus/data/models/game/game.dart';
+import 'package:kj_amongus/data/models/game_state/game_state.dart';
 import 'package:kj_amongus/data/models/task/task.dart';
 
 class GameService {
@@ -73,5 +74,9 @@ class GameService {
     final playersListLength = playersList.length;
 
     final blueGuysNumber = playersListLength ~/ 3;
+  }
+
+  Future<void> changeGameState(GameState state) async {
+    await _firestore.collection('games').doc('1').update({'state': state});
   }
 }

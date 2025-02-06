@@ -30,6 +30,12 @@ class PlayerService {
     });
   }
 
+  Future<Player> getPlayer(String id) {
+    return _firestore.collection('players').doc(id).get().then((snapshot) {
+      return Player.fromJson(snapshot.data()!);
+    });
+  }
+
   Future<Player> getPlayerByNickname(String nickname) async {
     final players = await _firestore.collection('players').get();
     final player = players.docs.firstWhere(

@@ -66,8 +66,7 @@ class PlayerJoinGameView extends StatelessWidget {
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => PlayerViewManager(
-                              nickname: nicknameController.text)),
+                          builder: (context) => PlayerViewManager()),
                       (route) => false);
                 },
                 child: Text('Dołącz do gry'),
