@@ -4,3 +4,5 @@ const tasksNumberForPlayer = 3;
 const tasksNumberForPlayerShort = 1;
 const tasksNumberForPlayerLong = 1;
 const tasksNumberForPlayerCommon = 1;
+const timeToKill = 60;
+const timeToDiscuss = 60;

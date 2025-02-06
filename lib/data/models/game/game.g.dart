@@ -34,6 +34,7 @@ Map<String, dynamic> _$$GameImplToJson(_$GameImpl instance) =>
 const _$GameStateEnumMap = {
   GameState.lobby: 'lobby',
   GameState.game: 'game',
+  GameState.sabotage: 'sabotage',
   GameState.emergencyMeeting: 'emergencyMeeting',
   GameState.gameOver: 'gameOver',
 };

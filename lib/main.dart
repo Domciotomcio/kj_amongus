@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kj_amongus/firebase_options.dart';
 import 'package:kj_amongus/views/game_manager/game_manager_view.dart';
+import 'package:kj_amongus/views/player/player_impostor_view.dart';
 import 'package:kj_amongus/views/player/player_join_game_view.dart';
 import 'package:kj_amongus/views/player/player_qr_view.dart';
 import 'package:kj_amongus/views/player/player_view_manager.dart';
@@ -60,9 +61,10 @@ class MyApp extends StatelessWidget {
       // home: GameView(),
       //home: PlayerView(),
       //home: PlayerJoinGameView(),
-      home: PlayerViewManager(),
+      //home: PlayerViewManager(),
       //home: PlayerQrView(),
-      //home: MyHomePage(title: "Title"),
+      // home: MyHomePage(title: "Title"),
+      home: PlayerImpostorView(),
     );
   }
 }

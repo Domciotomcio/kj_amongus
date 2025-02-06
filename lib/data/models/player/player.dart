@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:kj_amongus/data/models/fraction/fraction.dart';
+import 'package:kj_amongus/data/models/game/game.dart';
 import 'package:kj_amongus/data/models/task/task.dart';
 
 part 'player.freezed.dart';
@@ -14,6 +16,7 @@ class Player with _$Player {
     Fraction? fraction,
     required List<Task> tasks,
     required bool isAlive,
+    @TimestampConverter() DateTime? lastKillTimestamp,
   }) = _Player;
 
   factory Player.fromJson(Map<String, dynamic> json) => _$PlayerFromJson(json);

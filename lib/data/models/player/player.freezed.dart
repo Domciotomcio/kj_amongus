@@ -26,6 +26,8 @@ mixin _$Player {
   Fraction? get fraction => throw _privateConstructorUsedError;
   List<Task> get tasks => throw _privateConstructorUsedError;
   bool get isAlive => throw _privateConstructorUsedError;
+  @TimestampConverter()
+  DateTime? get lastKillTimestamp => throw _privateConstructorUsedError;
 
   /// Serializes this Player to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -47,7 +49,8 @@ abstract class $PlayerCopyWith<$Res> {
       String name,
       Fraction? fraction,
       List<Task> tasks,
-      bool isAlive});
+      bool isAlive,
+      @TimestampConverter() DateTime? lastKillTimestamp});
 }
 
 /// @nodoc
@@ -71,6 +74,7 @@ class _$PlayerCopyWithImpl<$Res, $Val extends Player>
     Object? fraction = freezed,
     Object? tasks = null,
     Object? isAlive = null,
+    Object? lastKillTimestamp = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -97,6 +101,10 @@ class _$PlayerCopyWithImpl<$Res, $Val extends Player>
           ? _value.isAlive
           : isAlive // ignore: cast_nullable_to_non_nullable
               as bool,
+      lastKillTimestamp: freezed == lastKillTimestamp
+          ? _value.lastKillTimestamp
+          : lastKillTimestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 }
@@ -114,7 +122,8 @@ abstract class _$$PlayerImplCopyWith<$Res> implements $PlayerCopyWith<$Res> {
       String name,
       Fraction? fraction,
       List<Task> tasks,
-      bool isAlive});
+      bool isAlive,
+      @TimestampConverter() DateTime? lastKillTimestamp});
 }
 
 /// @nodoc
@@ -136,6 +145,7 @@ class __$$PlayerImplCopyWithImpl<$Res>
     Object? fraction = freezed,
     Object? tasks = null,
     Object? isAlive = null,
+    Object? lastKillTimestamp = freezed,
   }) {
     return _then(_$PlayerImpl(
       id: null == id
@@ -162,6 +172,10 @@ class __$$PlayerImplCopyWithImpl<$Res>
           ? _value.isAlive
           : isAlive // ignore: cast_nullable_to_non_nullable
               as bool,
+      lastKillTimestamp: freezed == lastKillTimestamp
+          ? _value.lastKillTimestamp
+          : lastKillTimestamp // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -175,7 +189,8 @@ class _$PlayerImpl extends _Player {
       required this.name,
       this.fraction,
       required final List<Task> tasks,
-      required this.isAlive})
+      required this.isAlive,
+      @TimestampConverter() this.lastKillTimestamp})
       : _tasks = tasks,
         super._();
 
@@ -200,10 +215,13 @@ class _$PlayerImpl extends _Player {
 
   @override
   final bool isAlive;
+  @override
+  @TimestampConverter()
+  final DateTime? lastKillTimestamp;
 
   @override
   String toString() {
-    return 'Player(id: $id, nickname: $nickname, name: $name, fraction: $fraction, tasks: $tasks, isAlive: $isAlive)';
+    return 'Player(id: $id, nickname: $nickname, name: $name, fraction: $fraction, tasks: $tasks, isAlive: $isAlive, lastKillTimestamp: $lastKillTimestamp)';
   }
 
   @override
@@ -218,13 +236,15 @@ class _$PlayerImpl extends _Player {
             (identical(other.fraction, fraction) ||
                 other.fraction == fraction) &&
             const DeepCollectionEquality().equals(other._tasks, _tasks) &&
-            (identical(other.isAlive, isAlive) || other.isAlive == isAlive));
+            (identical(other.isAlive, isAlive) || other.isAlive == isAlive) &&
+            (identical(other.lastKillTimestamp, lastKillTimestamp) ||
+                other.lastKillTimestamp == lastKillTimestamp));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, nickname, name, fraction,
-      const DeepCollectionEquality().hash(_tasks), isAlive);
+      const DeepCollectionEquality().hash(_tasks), isAlive, lastKillTimestamp);
 
   /// Create a copy of Player
   /// with the given fields replaced by the non-null parameter values.
@@ -249,7 +269,8 @@ abstract class _Player extends Player {
       required final String name,
       final Fraction? fraction,
       required final List<Task> tasks,
-      required final bool isAlive}) = _$PlayerImpl;
+      required final bool isAlive,
+      @TimestampConverter() final DateTime? lastKillTimestamp}) = _$PlayerImpl;
   const _Player._() : super._();
 
   factory _Player.fromJson(Map<String, dynamic> json) = _$PlayerImpl.fromJson;
@@ -266,6 +287,9 @@ abstract class _Player extends Player {
   List<Task> get tasks;
   @override
   bool get isAlive;
+  @override
+  @TimestampConverter()
+  DateTime? get lastKillTimestamp;
 
   /// Create a copy of Player
   /// with the given fields replaced by the non-null parameter values.
