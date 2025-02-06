@@ -1,10 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:kj_amongus/firebase_options.dart';
 import 'package:kj_amongus/views/game_manager/game_manager_view.dart';
 import 'package:kj_amongus/views/player/player_join_game_view.dart';
 import 'package:kj_amongus/views/player_test_view.dart';
 import 'package:kj_amongus/views/player/player_view.dart';
+import 'package:kj_amongus/views/test/test_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,11 +27,38 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
+        textTheme: GoogleFonts.amaticScTextTheme(),
       ),
+      darkTheme: ThemeData(
+          //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          brightness: Brightness.dark,
+          useMaterial3: true,
+          textTheme: GoogleFonts.amaticScTextTheme()
+              .apply(bodyColor: Colors.white)
+              .copyWith(
+                bodyLarge: GoogleFonts.amaticSc(
+                    fontSize: 28,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+                bodyMedium: GoogleFonts.amaticSc(
+                    fontSize: 24,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+                bodySmall: GoogleFonts.amaticSc(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold),
+                titleLarge: GoogleFonts.amaticSc(
+                    fontSize: 36,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              )),
+      themeMode: ThemeMode.dark,
       //home: PlayerTestView(),
       // home: GameView(),
-      // home: PlayerView(),
+      //home: PlayerView(),
       home: PlayerJoinGameView(),
+      //home: TestView(),
     );
   }
 }

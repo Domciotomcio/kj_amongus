@@ -59,4 +59,19 @@ class GameService {
       'completedTasksNumber': completedTasksNumber
     });
   }
+
+  Future<void> assignFractions() async {
+    // remove fractions from all players
+    final players = await _firestore.collection('players').get();
+    for (final player in players.docs) {
+      await player.reference.update({'fraction': null});
+    }
+
+    // get all players
+    final playersList = players.docs.map((player) => player.data()).toList();
+
+    final playersListLength = playersList.length;
+
+    final blueGuysNumber = playersListLength ~/ 3;
+  }
 }
