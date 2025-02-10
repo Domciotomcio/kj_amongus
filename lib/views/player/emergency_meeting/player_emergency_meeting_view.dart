@@ -3,7 +3,9 @@ import 'package:kj_amongus/data/models/player/player.dart';
 import 'package:kj_amongus/services/player_service.dart';
 
 class PlayerEmergencyMeetingView extends StatefulWidget {
-  PlayerEmergencyMeetingView({super.key});
+  final Player player;
+
+  const PlayerEmergencyMeetingView({super.key, required this.player});
 
   @override
   State<PlayerEmergencyMeetingView> createState() =>
@@ -36,38 +38,45 @@ class _PlayerEmergencyMeetingViewState
 
             final players = snapshot.data as List<Player>;
 
-            return Column(
-              children: [
-                const Text("Zagłosuj na gracza:"),
-                Expanded(
-                    child: ListView.separated(
-                  itemCount: players.length,
-                  separatorBuilder: (context, index) => const Divider(),
-                  itemBuilder: (context, index) {
-                    final player = players[index];
-                    return ListTile(
-                      title: player.isAlive
-                          ? Text(player.name)
-                          : Text(player.name,
-                              style: const TextStyle(
-                                  decoration: TextDecoration.lineThrough)),
-                      subtitle: Text("Liczba głosów"),
-                      trailing: player.isAlive && !alreadyVoted
-                          ? ElevatedButton(
-                              onPressed: () {
-                                playerService.voteForPlayer(player.id);
-                                setState(() {
-                                  alreadyVoted = true;
-                                });
-                              },
-                              child: const Text("Zabij"),
-                            )
-                          : null,
-                    );
-                  },
-                )),
-              ],
-            );
+            if (players
+                .where((element) => element.isAlive)
+                .every((element) => element.id != widget.player.id)) {
+              return Center(
+                  child: const Text("Nie żyjesz, nie możesz głosować"));
+            } else {
+              return Column(
+                children: [
+                  const Text("Zagłosuj na gracza:"),
+                  Expanded(
+                      child: ListView.separated(
+                    itemCount: players.length,
+                    separatorBuilder: (context, index) => const Divider(),
+                    itemBuilder: (context, index) {
+                      final player = players[index];
+                      return ListTile(
+                        title: player.isAlive
+                            ? Text(player.name)
+                            : Text(player.name,
+                                style: const TextStyle(
+                                    decoration: TextDecoration.lineThrough)),
+                        subtitle: Text("Liczba głosów"),
+                        trailing: player.isAlive && !alreadyVoted
+                            ? ElevatedButton(
+                                onPressed: () {
+                                  playerService.voteForPlayer(player.id);
+                                  setState(() {
+                                    alreadyVoted = true;
+                                  });
+                                },
+                                child: const Text("Zabij"),
+                              )
+                            : null,
+                      );
+                    },
+                  )),
+                ],
+              );
+            }
           }),
     );
   }

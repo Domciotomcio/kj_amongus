@@ -3,6 +3,7 @@ import 'package:kj_amongus/data/models/fraction/fraction.dart';
 import 'package:kj_amongus/data/models/player/player.dart';
 import 'package:kj_amongus/services/game_service.dart';
 import 'package:kj_amongus/services/player_service.dart';
+import 'package:kj_amongus/views/player/player_qr_view.dart';
 import 'package:kj_amongus/widgets/task_progress_bar.dart';
 
 class PlayerGameView extends StatelessWidget {
@@ -30,7 +31,34 @@ class PlayerGameView extends StatelessWidget {
 
                 if (snapshot.hasData) {
                   final player = snapshot.data as Player;
-                  return Body(player);
+
+                  // Show dialog if player is not alive
+                  if (!player.isAlive) {
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      showDialog(
+                        context: context,
+                        barrierDismissible:
+                            false, // Prevent dismissing by tapping outside
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            backgroundColor: Colors.red,
+                            title: Text('Nie żyjesz'),
+                            content: Text('Dokończ swoje zadani jako duch'),
+                            actions: <Widget>[
+                              TextButton(
+                                child: Text('OK'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    });
+                  }
+
+                  return Body(player, context);
                 } else {
                   return Text("Idk what happened");
                 }
@@ -38,7 +66,7 @@ class PlayerGameView extends StatelessWidget {
         });
   }
 
-  Scaffold Body(Player player) {
+  Scaffold Body(Player player, BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Gracz ${player.nickname}'),
@@ -104,7 +132,8 @@ class PlayerGameView extends StatelessWidget {
               Divider(),
               Center(
                   child: FilledButton.icon(
-                onPressed: null,
+                onPressed: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PlayerQrView())),
                 label: Text("Skanuj kod QR"),
                 icon: Icon(Icons.camera),
               )),

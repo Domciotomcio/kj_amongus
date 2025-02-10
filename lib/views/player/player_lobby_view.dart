@@ -51,7 +51,7 @@ class PlayerLobbyView extends StatelessWidget {
                     return Column(
                       children: [
                         Text("Dołączyłeś do gry jako: ${player.nickname}"),
-                        Text("ID: ${player.nickname}"),
+                        Text("ID: ${player.id}"),
                         Expanded(
                           child: ListView.separated(
                             separatorBuilder: (context, index) =>

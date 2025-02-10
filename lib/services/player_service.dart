@@ -75,6 +75,14 @@ class PlayerService {
     return true;
   }
 
+  Future<bool> removePlayers() async {
+    final players = await _firestore.collection('players').get();
+    for (final player in players.docs) {
+      await player.reference.delete();
+    }
+    return true;
+  }
+
   Future<bool> isPlayerExists(String nickname) async {
     final players = await _firestore.collection('players').get();
     return players.docs
