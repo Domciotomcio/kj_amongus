@@ -16,6 +16,14 @@ class PlayerSettingService {
     });
   }
 
+  Future<PlayersSetting> getPlayersSetting() {
+    return _firestore
+        .collection('games')
+        .doc('players-setting')
+        .get()
+        .then((snapshot) => PlayersSetting.fromJson(snapshot.data()!));
+  }
+
   Future<void> setFractionNumber(Fraction fraction, int number) async {
     await _firestore.collection('games').doc('players-setting').update({
       fraction.name + 'Number': number,

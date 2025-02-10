@@ -26,18 +26,6 @@ class GameService {
     }
   }
 
-  Future<void> startEmergencyMeeting() async {
-    await _firestore.collection('games').doc('1').update({
-      'isEmergencyMeeting': true,
-      'emergencyMeetingStartedAt': DateTime.now()
-    });
-  }
-
-  Future<void> endEmergencyMeeting() async {
-    await _firestore.collection('games').doc('1').update(
-        {'isEmergencyMeeting': false, 'emergencyMeetingStartedAt': null});
-  }
-
   Future<bool> isGameStarted() async {
     final game = await _firestore.collection('games').doc('1').get();
     return game.data()!['state'] != 'lobby';
@@ -77,6 +65,33 @@ class GameService {
   }
 
   Future<void> changeGameState(GameState state) async {
-    await _firestore.collection('games').doc('1').update({'state': state});
+    // emergency meeting
+    if (state == GameState.emergencyMeeting) {
+      // reset votes for player
+      final players = await _firestore.collection('players').get();
+      for (final player in players.docs) {
+        await player.reference.update({'votesNumber': 0});
+      }
+
+      await _firestore.collection('games').doc('1').update({'state': state});
+      return;
+    }
+
+    // emergency meeting summary
+    if (state == GameState.emergencyMeetingSummary) {
+      // find player with most votes
+      final mostVotedPlayer = await _firestore
+          .collection('players')
+          .orderBy('votesNumber')
+          .limitToLast(1)
+          .get()
+          .then((snapshot) => snapshot.docs.first);
+
+      // kill player
+      await mostVotedPlayer.reference.update({'isAlive': false});
+
+      await _firestore.collection('games').doc('1').update({'state': state});
+      return;
+    }
   }
 }

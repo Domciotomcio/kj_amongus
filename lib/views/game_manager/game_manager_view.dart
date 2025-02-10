@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:kj_amongus/data/models/fraction/fraction.dart';
+import 'package:kj_amongus/data/models/game_state/game_state.dart';
 import 'package:kj_amongus/data/models/playersSetting/players_setting.dart';
 import 'package:kj_amongus/services/game_service.dart';
 import 'package:kj_amongus/services/player_service.dart';
 import 'package:kj_amongus/services/player_setting_service.dart';
 import 'package:kj_amongus/views/game_manager/game_manager_player_view.dart';
+import 'package:kj_amongus/widgets/task_progress_bar.dart';
 
 class GameView extends StatelessWidget {
   final GameService gameService = GameService();
@@ -40,12 +42,7 @@ class GameView extends StatelessWidget {
                           Text(game.toString()),
                           Divider(),
                           Text("Postęp zadań"),
-                          Text(
-                              "Liczba zrobionych tasków ${game.completedTasksNumber}/${game.allTasksNumber}"),
-                          LinearProgressIndicator(
-                            value:
-                                game.completedTasksNumber / game.allTasksNumber,
-                          ),
+                          TaskProgressBar(),
                           Divider(),
                           Text("Stan gry"),
                           Text(game.state.toString()),
@@ -230,6 +227,7 @@ class GameManagerButtons extends StatelessWidget {
           SizedBox(height: 10),
           ElevatedButton(onPressed: null, child: Text("Assign Tasks")),
           Divider(),
+          Text("Zarządzanie grą"),
           FilledButton(
               onPressed: () async {
                 // start game
@@ -243,7 +241,14 @@ class GameManagerButtons extends StatelessWidget {
                       SnackBar(content: Text("Error starting game")));
                 }
               },
-              child: Text("Start Game"))
+              child: Text("Start gry")),
+          SizedBox(height: 10),
+          FilledButton(
+            onPressed: () async {
+              gameService.changeGameState(GameState.game);
+            },
+            child: Text("Głosowanie -> Gra"),
+          ),
         ],
       ),
     );

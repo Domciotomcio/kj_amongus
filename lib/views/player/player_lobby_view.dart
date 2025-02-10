@@ -9,9 +9,9 @@ import 'package:kj_amongus/views/player/player_view.dart';
 class PlayerLobbyView extends StatelessWidget {
   final PlayerService playerService = PlayerService();
   final GameService gameService = GameService();
-  final String nickname;
+  final Player player;
 
-  PlayerLobbyView({super.key, required this.nickname});
+  PlayerLobbyView({super.key, required this.player});
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,8 @@ class PlayerLobbyView extends StatelessWidget {
                     final players = snapshot.data as List<Player>;
                     return Column(
                       children: [
-                        Text("Dołączyłeś do gry jako: $nickname"),
+                        Text("Dołączyłeś do gry jako: ${player.nickname}"),
+                        Text("ID: ${player.nickname}"),
                         Expanded(
                           child: ListView.separated(
                             separatorBuilder: (context, index) =>

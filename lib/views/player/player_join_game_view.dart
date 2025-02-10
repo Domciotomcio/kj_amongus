@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kj_amongus/data/models/player/player.dart';
 import 'package:kj_amongus/services/game_service.dart';
 import 'package:kj_amongus/services/player_service.dart';
-import 'package:kj_amongus/views/player/player_lobby_view.dart';
-import 'package:kj_amongus/views/player/player_view.dart';
+import 'package:kj_amongus/views/game_manager/game_manager_view.dart';
 import 'package:kj_amongus/views/player/player_view_manager.dart';
 
 class PlayerJoinGameView extends StatelessWidget {
@@ -43,12 +42,19 @@ class PlayerJoinGameView extends StatelessWidget {
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () async {
+                  if (nicknameController.text == "adminadminadmin" &&
+                      nameController.text == "") {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => GameView()),
+                    );
+                    return;
+                  }
+
                   // if game is already started
                   bool isGameStarted = await gameService.isGameStarted();
                   bool isPlayerExists = await playerService
                       .isPlayerExists(nicknameController.text);
-
-                  // if is game started, then try to find player with this nickname and go to player_view
 
                   if (isGameStarted && !isPlayerExists) {
                     // error, game started, but player not found
@@ -60,13 +66,19 @@ class PlayerJoinGameView extends StatelessWidget {
                   if (!isPlayerExists) {
                     // player not found, create new player
                     await playerService.createPlayer(
-                        nicknameController.text, nameController.text);
+                        nicknameController.text.toUpperCase(),
+                        nameController.text);
                   }
+
+                  Player player = await playerService.getPlayerByNickname(
+                      nicknameController.text.toUpperCase());
 
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => PlayerViewManager()),
+                          builder: (context) => PlayerViewManager(
+                                player: player,
+                              )),
                       (route) => false);
                 },
                 child: Text('Dołącz do gry'),

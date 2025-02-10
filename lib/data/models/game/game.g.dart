@@ -35,7 +35,9 @@ const _$GameStateEnumMap = {
   GameState.lobby: 'lobby',
   GameState.game: 'game',
   GameState.sabotage: 'sabotage',
+  GameState.emergencyMeetingCallout: 'emergencyMeetingCallout',
   GameState.emergencyMeeting: 'emergencyMeeting',
+  GameState.emergencyMeetingSummary: 'emergencyMeetingSummary',
   GameState.gameOver: 'gameOver',
 };
 

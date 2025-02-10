@@ -16,6 +16,7 @@ class Player with _$Player {
     Fraction? fraction,
     required List<Task> tasks,
     required bool isAlive,
+    required int votesNumber,
     @TimestampConverter() DateTime? lastKillTimestamp,
   }) = _Player;
 

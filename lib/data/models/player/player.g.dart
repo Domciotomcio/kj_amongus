@@ -15,6 +15,7 @@ _$PlayerImpl _$$PlayerImplFromJson(Map<String, dynamic> json) => _$PlayerImpl(
           .map((e) => Task.fromJson(e as Map<String, dynamic>))
           .toList(),
       isAlive: json['isAlive'] as bool,
+      votesNumber: (json['votesNumber'] as num).toInt(),
       lastKillTimestamp: _$JsonConverterFromJson<Timestamp, DateTime>(
           json['lastKillTimestamp'], const TimestampConverter().fromJson),
     );
@@ -27,6 +28,7 @@ Map<String, dynamic> _$$PlayerImplToJson(_$PlayerImpl instance) =>
       'fraction': _$FractionEnumMap[instance.fraction],
       'tasks': instance.tasks,
       'isAlive': instance.isAlive,
+      'votesNumber': instance.votesNumber,
       'lastKillTimestamp': _$JsonConverterToJson<Timestamp, DateTime>(
           instance.lastKillTimestamp, const TimestampConverter().toJson),
     };

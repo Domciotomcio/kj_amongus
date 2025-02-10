@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kj_amongus/constants/const.dart';
+import 'package:kj_amongus/constants/players_id_list.dart';
 import 'package:kj_amongus/constants/task_templates.dart';
+import 'package:kj_amongus/data/models/game_state/game_state.dart';
 import 'package:kj_amongus/data/models/player/player.dart';
 import 'package:kj_amongus/data/models/task/task.dart';
 import 'package:kj_amongus/data/models/task/task_template.dart';
@@ -11,7 +13,10 @@ class PlayerService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<void> createPlayer(String nickname, String name) async {
-    final id = Uuid().v4();
+    // get list of players length
+    final playersLength = (await _firestore.collection('players').get()).size;
+
+    final id = playersIdList[playersLength];
 
     final player = Player(
         id: id,
@@ -19,7 +24,8 @@ class PlayerService {
         name: name,
         tasks: [],
         isAlive: true,
-        fraction: null);
+        fraction: null,
+        votesNumber: 0);
 
     await _firestore.collection('players').doc(id).set(player.toJson());
   }
@@ -53,9 +59,26 @@ class PlayerService {
     });
   }
 
+  Future<List<Player>> getPlayers() {
+    return _firestore.collection('players').get().then((snapshot) {
+      return snapshot.docs.map((doc) {
+        return Player.fromJson(doc.data());
+      }).toList();
+    });
+  }
+
+  Future<bool> updatePlayer(Player player) async {
+    await _firestore
+        .collection('players')
+        .doc(player.id)
+        .update(player.toJson());
+    return true;
+  }
+
   Future<bool> isPlayerExists(String nickname) async {
     final players = await _firestore.collection('players').get();
-    return players.docs.any((player) => player.data()['nickname'] == nickname);
+    return players.docs
+        .any((player) => player.data()['nickname'] == nickname.toUpperCase());
   }
 
   Future<void> removeAllPlayers() async {
@@ -67,8 +90,9 @@ class PlayerService {
 
   Future<void> addTasksToPlayers() async {
     final players = await _firestore.collection('players').get();
+
     for (final player in players.docs) {
-      final shuffledTemplates = List<TaskTemplate>.from(taskTemplates)
+      final shuffledTemplates = List<TaskTemplate>.from(taskTemplatesLong)
         ..shuffle();
       final selectedTemplates =
           shuffledTemplates.take(tasksNumberForPlayer).toList();
@@ -96,7 +120,7 @@ class PlayerService {
 
   Future<void> reportBody(String playerId) async {
     final GameService gameService = GameService();
-    await gameService.startEmergencyMeeting();
+    await gameService.changeGameState(GameState.emergencyMeeting);
   }
 
   Future<void> completeTask(String playerId, String taskId) async {
@@ -112,5 +136,24 @@ class PlayerService {
     // recalculate tasks for game
     final gameService = GameService();
     await gameService.recalculateTasks();
+  }
+
+  Future<void> voteForPlayer(String id) async {
+    return _firestore.collection('players').doc(id).update({
+      'votesNumber': FieldValue.increment(1),
+    });
+  }
+
+  Future<bool> isMostVotedPlayer(String id) async {
+    // find player with most votes
+    return _firestore
+        .collection('players')
+        .orderBy('votesNumber')
+        .limitToLast(1)
+        .get()
+        .then((snapshot) {
+      final mostVotedPlayer = snapshot.docs.first;
+      return mostVotedPlayer.id == id;
+    });
   }
 }
