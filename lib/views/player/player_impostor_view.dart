@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:kj_amongus/constants/const.dart';
 import 'package:kj_amongus/constants/fake_tasks.dart';
 import 'package:kj_amongus/data/models/player/player.dart';
+import 'package:kj_amongus/services/functions/sabotate_engines.dart';
 import 'package:kj_amongus/services/player_service.dart';
 import 'package:kj_amongus/widgets/sabotage_widget.dart';
 
 class PlayerImpostorView extends StatelessWidget {
   final PlayerService playerService = PlayerService();
+  final Player player;
 
-  PlayerImpostorView({super.key});
+  PlayerImpostorView({super.key, required this.player});
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +19,21 @@ class PlayerImpostorView extends StatelessWidget {
         title: Text('Gra Among Us'),
       ),
       body: StreamBuilder<Player>(
-          stream: playerService.getPlayerStream("PLAYER10"),
+          stream: playerService.getPlayerStream(player.id),
           builder: (context, snapshot) {
-            if (!snapshot.hasData) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return CircularProgressIndicator();
             }
 
-            final player = snapshot.data!;
+            if (snapshot.hasError) {
+              return Text('Error: ${snapshot.error}');
+            }
+
+            if (!snapshot.hasData) {
+              return Text('Brak danych');
+            }
+
+            final player = snapshot.data as Player;
 
             return SingleChildScrollView(
               child: Column(
@@ -59,11 +68,9 @@ class PlayerImpostorView extends StatelessWidget {
                       },
                     ),
                   Divider(),
-                  KillCountdownTimer(
-                      startTime: DateTime.now(), countdownSeconds: 5),
+                  KillCountdownTimer(startTime: DateTime.now()),
                   Divider(),
-                  SabotageCountdownTimer(
-                      startTime: DateTime.now(), countdownSeconds: 6),
+                  SabotageCountdownTimer(startTime: DateTime.now()),
                 ],
               ),
             );
@@ -74,14 +81,13 @@ class PlayerImpostorView extends StatelessWidget {
 
 class KillCountdownTimer extends StatelessWidget {
   final DateTime startTime;
-  final int countdownSeconds;
 
-  KillCountdownTimer({required this.startTime, this.countdownSeconds = 10});
+  KillCountdownTimer({required this.startTime});
 
   Stream<int> _countdownStream() async* {
     while (true) {
       int elapsed = DateTime.now().difference(startTime).inSeconds;
-      int remaining = countdownSeconds - elapsed;
+      int remaining = timeToKill - elapsed;
 
       if (remaining > 0) {
         yield remaining;
@@ -123,15 +129,13 @@ class KillCountdownTimer extends StatelessWidget {
 
 class SabotageCountdownTimer extends StatelessWidget {
   final DateTime startTime;
-  final int countdownSeconds;
 
-  SabotageCountdownTimer(
-      {required this.startTime, required this.countdownSeconds});
+  SabotageCountdownTimer({required this.startTime});
 
   Stream<int> _countdownStream() async* {
     while (true) {
       int elapsed = DateTime.now().difference(startTime).inSeconds;
-      int remaining = countdownSeconds - elapsed;
+      int remaining = timeToSabotage - elapsed;
 
       if (remaining > 0) {
         yield remaining;
@@ -164,13 +168,8 @@ class SabotageCountdownTimer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: null,
-                    child: Text("Sabotuj światła"),
-                  ),
-                  SizedBox(width: 10),
-                  ElevatedButton(
-                    onPressed: null,
-                    child: Text("Sabotuj kotłownię"),
+                    onPressed: () => sabotateEngines(),
+                    child: Text("Sabotuj"),
                   ),
                 ],
               ),

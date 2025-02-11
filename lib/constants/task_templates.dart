@@ -5,7 +5,7 @@ const List<TaskTemplate> taskTemplatesLong = [
       id: "TASK1",
       name: "Śmieci",
       description:
-          "Odbierz trzy pakunki śmieci z graciarni i zanieś do kontenerów. następnie wrzuć do kubła z odpowiedniej odległości"),
+          "Odbierz trzy pakunki śmieci z kajut załogi i zanieś do magazynu. następnie wrzuć do kubła z odpowiedniej odległości"),
   TaskTemplate(
       id: "TASK2", name: "Sekwencja", description: "Powtórz zagraną melodię"),
   TaskTemplate(
@@ -39,7 +39,7 @@ const List<TaskTemplate> taskTemplatesShort = [
       description: "Policz o ile i w którą stronę należy zmienić temperaturę"),
   TaskTemplate(id: "TASK10", name: "Labirynt", description: "Rozwiąż labirynt"),
   TaskTemplate(
-      id: "TASK11", name: "Segregacja", description: "Posegreguj próbki"),
+      id: "TASK11", name: "Segregacja", description: "Ułóż wieżę z klocków w podanej kolejności, tak, by się nie wywróciła"),
   TaskTemplate(
       id: "TASK12",
       name: "Manekin",
@@ -50,7 +50,7 @@ const List<TaskTemplate> taskTemplatesCommon = [
   TaskTemplate(
       id: "TASK13",
       name: "ID",
-      description: "Zeskanuj swoje id u informatyka w kafejce"),
+      description: "Zarejestruj się u informatyka w kafejce"),
   TaskTemplate(
       id: "TASK14",
       name: "Medic",

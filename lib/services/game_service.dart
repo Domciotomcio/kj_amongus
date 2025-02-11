@@ -17,6 +17,21 @@ class GameService {
     });
   }
 
+  Future<Game> getGame() async {
+    final game = await _firestore.collection('games').doc('1').get();
+    return Game.fromJson(game.data()!);
+  }
+
+  Future<bool> updateGame(Game game) async {
+    try {
+      await _firestore.collection('games').doc('1').update(game.toJson());
+      return true;
+    } catch (e) {
+      log(e.toString());
+      return false;
+    }
+  }
+
   Future<bool> startGame() async {
     try {
       await _firestore.collection('games').doc('1').update({'isStarted': true});
