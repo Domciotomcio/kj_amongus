@@ -10,6 +10,7 @@ Future<bool> assignFraction() async {
   // get number of players
   List<Player> players = await playerService.getPlayers();
   final playersNumber = players.length;
+  print("Dotarłem tutja");
 
   // get number of green, blue and red
   final playersSetting = await playerSettingService.getPlayersSetting();
@@ -19,8 +20,11 @@ Future<bool> assignFraction() async {
 
   // check if the number is equal
   if (playersNumber != greenNumber + blueNumber + redNumber) {
+    print("Zwracam false");
     return false;
   }
+
+  print("Tutaj tez");
 
   // assign fraction to players
   players.shuffle();

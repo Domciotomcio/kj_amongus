@@ -24,7 +24,7 @@ mixin _$Player {
   String get nickname => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   Fraction? get fraction => throw _privateConstructorUsedError;
-  List<Task> get tasks => throw _privateConstructorUsedError;
+  List<Task>? get tasks => throw _privateConstructorUsedError;
   bool get isAlive => throw _privateConstructorUsedError;
   int get votesNumber => throw _privateConstructorUsedError;
   @TimestampConverter()
@@ -49,7 +49,7 @@ abstract class $PlayerCopyWith<$Res> {
       String nickname,
       String name,
       Fraction? fraction,
-      List<Task> tasks,
+      List<Task>? tasks,
       bool isAlive,
       int votesNumber,
       @TimestampConverter() DateTime? lastKillTimestamp});
@@ -74,7 +74,7 @@ class _$PlayerCopyWithImpl<$Res, $Val extends Player>
     Object? nickname = null,
     Object? name = null,
     Object? fraction = freezed,
-    Object? tasks = null,
+    Object? tasks = freezed,
     Object? isAlive = null,
     Object? votesNumber = null,
     Object? lastKillTimestamp = freezed,
@@ -96,10 +96,10 @@ class _$PlayerCopyWithImpl<$Res, $Val extends Player>
           ? _value.fraction
           : fraction // ignore: cast_nullable_to_non_nullable
               as Fraction?,
-      tasks: null == tasks
+      tasks: freezed == tasks
           ? _value.tasks
           : tasks // ignore: cast_nullable_to_non_nullable
-              as List<Task>,
+              as List<Task>?,
       isAlive: null == isAlive
           ? _value.isAlive
           : isAlive // ignore: cast_nullable_to_non_nullable
@@ -128,7 +128,7 @@ abstract class _$$PlayerImplCopyWith<$Res> implements $PlayerCopyWith<$Res> {
       String nickname,
       String name,
       Fraction? fraction,
-      List<Task> tasks,
+      List<Task>? tasks,
       bool isAlive,
       int votesNumber,
       @TimestampConverter() DateTime? lastKillTimestamp});
@@ -151,7 +151,7 @@ class __$$PlayerImplCopyWithImpl<$Res>
     Object? nickname = null,
     Object? name = null,
     Object? fraction = freezed,
-    Object? tasks = null,
+    Object? tasks = freezed,
     Object? isAlive = null,
     Object? votesNumber = null,
     Object? lastKillTimestamp = freezed,
@@ -173,10 +173,10 @@ class __$$PlayerImplCopyWithImpl<$Res>
           ? _value.fraction
           : fraction // ignore: cast_nullable_to_non_nullable
               as Fraction?,
-      tasks: null == tasks
+      tasks: freezed == tasks
           ? _value._tasks
           : tasks // ignore: cast_nullable_to_non_nullable
-              as List<Task>,
+              as List<Task>?,
       isAlive: null == isAlive
           ? _value.isAlive
           : isAlive // ignore: cast_nullable_to_non_nullable
@@ -201,7 +201,7 @@ class _$PlayerImpl extends _Player {
       required this.nickname,
       required this.name,
       this.fraction,
-      required final List<Task> tasks,
+      final List<Task>? tasks,
       required this.isAlive,
       required this.votesNumber,
       @TimestampConverter() this.lastKillTimestamp})
@@ -219,12 +219,14 @@ class _$PlayerImpl extends _Player {
   final String name;
   @override
   final Fraction? fraction;
-  final List<Task> _tasks;
+  final List<Task>? _tasks;
   @override
-  List<Task> get tasks {
+  List<Task>? get tasks {
+    final value = _tasks;
+    if (value == null) return null;
     if (_tasks is EqualUnmodifiableListView) return _tasks;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_tasks);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -294,7 +296,7 @@ abstract class _Player extends Player {
       required final String nickname,
       required final String name,
       final Fraction? fraction,
-      required final List<Task> tasks,
+      final List<Task>? tasks,
       required final bool isAlive,
       required final int votesNumber,
       @TimestampConverter() final DateTime? lastKillTimestamp}) = _$PlayerImpl;
@@ -311,7 +313,7 @@ abstract class _Player extends Player {
   @override
   Fraction? get fraction;
   @override
-  List<Task> get tasks;
+  List<Task>? get tasks;
   @override
   bool get isAlive;
   @override

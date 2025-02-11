@@ -17,7 +17,7 @@ class Game with _$Game {
     required int playersNumber,
     required int allTasksNumber,
     required int completedTasksNumber,
-    Fraction? winningFraction,
+    Fraction? winnerFraction,
   }) = _Game;
 
   factory Game.fromJson(Map<String, dynamic> json) => _$GameFromJson(json);

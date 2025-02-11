@@ -59,12 +59,11 @@ class PlayerService {
     });
   }
 
-  Future<List<Player>> getPlayers() {
-    return _firestore.collection('players').get().then((snapshot) {
-      return snapshot.docs.map((doc) {
-        return Player.fromJson(doc.data());
-      }).toList();
-    });
+  Future<List<Player>> getPlayers() async {
+    final players = await _firestore.collection('players').get();
+    return players.docs.map((doc) {
+      return Player.fromJson(doc.data());
+    }).toList();
   }
 
   Future<bool> updatePlayer(Player player) async {
@@ -72,6 +71,13 @@ class PlayerService {
         .collection('players')
         .doc(player.id)
         .update(player.toJson());
+    return true;
+  }
+
+  Future<bool> updatePlayerTasks(String playerId, List<Task> tasks) async {
+    await _firestore.collection('players').doc(playerId).update({
+      'tasks': tasks.map((e) => e.toJson()).toList(),
+    });
     return true;
   }
 

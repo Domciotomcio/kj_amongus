@@ -35,9 +35,9 @@ class PlayerGameOverView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text('Wygrała druzyna'),
-                Text(game.winningFraction!.name,
+                Text(game.winnerFraction!.name,
                     style: TextStyle(
-                        color: game.winningFraction!.color, fontSize: 48)),
+                        color: game.winnerFraction!.color, fontSize: 48)),
               ],
             );
           },

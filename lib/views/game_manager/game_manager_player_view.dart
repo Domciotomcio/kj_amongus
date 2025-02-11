@@ -36,7 +36,7 @@ class GameManagerPlayerView extends StatelessWidget {
                         "Czy zrobił wszystkie taski: ${player.isAllTasksDone()}"),
                     Divider(),
                     Text("Taski:"),
-                    for (var task in player.tasks)
+                    for (var task in player.tasks ?? [])
                       Text("${task.name}, czy zrobione: ${task.isDone}"),
                   ],
                 );

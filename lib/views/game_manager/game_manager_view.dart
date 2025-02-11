@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kj_amongus/data/models/fraction/fraction.dart';
 import 'package:kj_amongus/data/models/game_state/game_state.dart';
 import 'package:kj_amongus/data/models/playersSetting/players_setting.dart';
+import 'package:kj_amongus/services/functions/assign_fraction.dart';
+import 'package:kj_amongus/services/functions/assign_tasks.dart';
 import 'package:kj_amongus/services/game_service.dart';
 import 'package:kj_amongus/services/player_service.dart';
 import 'package:kj_amongus/services/player_setting_service.dart';
@@ -225,9 +227,16 @@ class GameManagerButtons extends StatelessWidget {
         children: [
           Text("Kliknij juz jak dołączą wszyscy gracze!!!"),
           SizedBox(height: 10),
-          ElevatedButton(onPressed: null, child: Text("Assign Fractions")),
+          Text("SIEMA"),
+          ElevatedButton(
+              onPressed: () async {
+                print("TAK!!");
+                await assignFraction();
+              },
+              child: Text("Assign Fractions")),
           SizedBox(height: 10),
-          ElevatedButton(onPressed: null, child: Text("Assign Tasks")),
+          ElevatedButton(
+              onPressed: () => assignTasks(), child: Text("Assign Tasks")),
           Divider(),
           Text("Zarządzanie grą"),
           FilledButton(
@@ -273,22 +282,16 @@ class GameOverButtons extends StatelessWidget {
           ElevatedButton(
             onPressed: () => gameService.gameOver(Fraction.blue),
             child: Text("Wygrywają niebiescy"),
-            // style: ButtonStyle(
-            //     backgroundColor: MaterialStateProperty.all(Colors.blue)),
           ),
           SizedBox(height: 10),
           ElevatedButton(
             onPressed: () => gameService.gameOver(Fraction.green),
             child: Text("Wygrywają zieloni"),
-            // style: ButtonStyle(
-            //     backgroundColor: MaterialStateProperty.all(Colors.green)),
           ),
           SizedBox(height: 10),
           ElevatedButton(
             onPressed: () => gameService.gameOver(Fraction.red),
             child: Text("Wygrywają czerwoni"),
-            // style: ButtonStyle(
-            //     backgroundColor: MaterialStateProperty.all(Colors.red)),
           ),
         ],
       ),

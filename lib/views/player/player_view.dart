@@ -116,7 +116,7 @@ class PlayerGameView extends StatelessWidget {
                       style: TextStyle(color: Colors.green)),
                 ),
 
-              for (var task in player.tasks)
+              for (var task in player.tasks ?? [])
                 ListTile(
                   title: Text(
                     task.name,
@@ -132,8 +132,12 @@ class PlayerGameView extends StatelessWidget {
               Divider(),
               Center(
                   child: FilledButton.icon(
-                onPressed: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PlayerQrView(player: player,))),
+                onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PlayerQrView(
+                              player: player,
+                            ))),
                 label: Text("Skanuj kod QR"),
                 icon: Icon(Icons.camera),
               )),

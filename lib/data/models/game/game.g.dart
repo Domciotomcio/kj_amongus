@@ -16,8 +16,8 @@ _$GameImpl _$$GameImplFromJson(Map<String, dynamic> json) => _$GameImpl(
       playersNumber: (json['playersNumber'] as num).toInt(),
       allTasksNumber: (json['allTasksNumber'] as num).toInt(),
       completedTasksNumber: (json['completedTasksNumber'] as num).toInt(),
-      winningFraction:
-          $enumDecodeNullable(_$FractionEnumMap, json['winningFraction']),
+      winnerFraction:
+          $enumDecodeNullable(_$FractionEnumMap, json['winnerFraction']),
     );
 
 Map<String, dynamic> _$$GameImplToJson(_$GameImpl instance) =>
@@ -31,7 +31,7 @@ Map<String, dynamic> _$$GameImplToJson(_$GameImpl instance) =>
       'playersNumber': instance.playersNumber,
       'allTasksNumber': instance.allTasksNumber,
       'completedTasksNumber': instance.completedTasksNumber,
-      'winningFraction': _$FractionEnumMap[instance.winningFraction],
+      'winnerFraction': _$FractionEnumMap[instance.winnerFraction],
     };
 
 const _$GameStateEnumMap = {

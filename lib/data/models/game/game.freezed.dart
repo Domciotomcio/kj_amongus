@@ -28,7 +28,7 @@ mixin _$Game {
   int get playersNumber => throw _privateConstructorUsedError;
   int get allTasksNumber => throw _privateConstructorUsedError;
   int get completedTasksNumber => throw _privateConstructorUsedError;
-  Fraction? get winningFraction => throw _privateConstructorUsedError;
+  Fraction? get winnerFraction => throw _privateConstructorUsedError;
 
   /// Serializes this Game to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -52,7 +52,7 @@ abstract class $GameCopyWith<$Res> {
       int playersNumber,
       int allTasksNumber,
       int completedTasksNumber,
-      Fraction? winningFraction});
+      Fraction? winnerFraction});
 }
 
 /// @nodoc
@@ -77,7 +77,7 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
     Object? playersNumber = null,
     Object? allTasksNumber = null,
     Object? completedTasksNumber = null,
-    Object? winningFraction = freezed,
+    Object? winnerFraction = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -108,9 +108,9 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
           ? _value.completedTasksNumber
           : completedTasksNumber // ignore: cast_nullable_to_non_nullable
               as int,
-      winningFraction: freezed == winningFraction
-          ? _value.winningFraction
-          : winningFraction // ignore: cast_nullable_to_non_nullable
+      winnerFraction: freezed == winnerFraction
+          ? _value.winnerFraction
+          : winnerFraction // ignore: cast_nullable_to_non_nullable
               as Fraction?,
     ) as $Val);
   }
@@ -131,7 +131,7 @@ abstract class _$$GameImplCopyWith<$Res> implements $GameCopyWith<$Res> {
       int playersNumber,
       int allTasksNumber,
       int completedTasksNumber,
-      Fraction? winningFraction});
+      Fraction? winnerFraction});
 }
 
 /// @nodoc
@@ -153,7 +153,7 @@ class __$$GameImplCopyWithImpl<$Res>
     Object? playersNumber = null,
     Object? allTasksNumber = null,
     Object? completedTasksNumber = null,
-    Object? winningFraction = freezed,
+    Object? winnerFraction = freezed,
   }) {
     return _then(_$GameImpl(
       id: null == id
@@ -184,9 +184,9 @@ class __$$GameImplCopyWithImpl<$Res>
           ? _value.completedTasksNumber
           : completedTasksNumber // ignore: cast_nullable_to_non_nullable
               as int,
-      winningFraction: freezed == winningFraction
-          ? _value.winningFraction
-          : winningFraction // ignore: cast_nullable_to_non_nullable
+      winnerFraction: freezed == winnerFraction
+          ? _value.winnerFraction
+          : winnerFraction // ignore: cast_nullable_to_non_nullable
               as Fraction?,
     ));
   }
@@ -203,7 +203,7 @@ class _$GameImpl implements _Game {
       required this.playersNumber,
       required this.allTasksNumber,
       required this.completedTasksNumber,
-      this.winningFraction});
+      this.winnerFraction});
 
   factory _$GameImpl.fromJson(Map<String, dynamic> json) =>
       _$$GameImplFromJson(json);
@@ -224,11 +224,11 @@ class _$GameImpl implements _Game {
   @override
   final int completedTasksNumber;
   @override
-  final Fraction? winningFraction;
+  final Fraction? winnerFraction;
 
   @override
   String toString() {
-    return 'Game(id: $id, name: $name, state: $state, emergencyMeetingStartedAt: $emergencyMeetingStartedAt, playersNumber: $playersNumber, allTasksNumber: $allTasksNumber, completedTasksNumber: $completedTasksNumber, winningFraction: $winningFraction)';
+    return 'Game(id: $id, name: $name, state: $state, emergencyMeetingStartedAt: $emergencyMeetingStartedAt, playersNumber: $playersNumber, allTasksNumber: $allTasksNumber, completedTasksNumber: $completedTasksNumber, winnerFraction: $winnerFraction)';
   }
 
   @override
@@ -248,8 +248,8 @@ class _$GameImpl implements _Game {
                 other.allTasksNumber == allTasksNumber) &&
             (identical(other.completedTasksNumber, completedTasksNumber) ||
                 other.completedTasksNumber == completedTasksNumber) &&
-            (identical(other.winningFraction, winningFraction) ||
-                other.winningFraction == winningFraction));
+            (identical(other.winnerFraction, winnerFraction) ||
+                other.winnerFraction == winnerFraction));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -263,7 +263,7 @@ class _$GameImpl implements _Game {
       playersNumber,
       allTasksNumber,
       completedTasksNumber,
-      winningFraction);
+      winnerFraction);
 
   /// Create a copy of Game
   /// with the given fields replaced by the non-null parameter values.
@@ -290,7 +290,7 @@ abstract class _Game implements Game {
       required final int playersNumber,
       required final int allTasksNumber,
       required final int completedTasksNumber,
-      final Fraction? winningFraction}) = _$GameImpl;
+      final Fraction? winnerFraction}) = _$GameImpl;
 
   factory _Game.fromJson(Map<String, dynamic> json) = _$GameImpl.fromJson;
 
@@ -310,7 +310,7 @@ abstract class _Game implements Game {
   @override
   int get completedTasksNumber;
   @override
-  Fraction? get winningFraction;
+  Fraction? get winnerFraction;
 
   /// Create a copy of Game
   /// with the given fields replaced by the non-null parameter values.

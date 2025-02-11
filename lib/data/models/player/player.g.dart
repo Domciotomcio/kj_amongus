@@ -11,8 +11,8 @@ _$PlayerImpl _$$PlayerImplFromJson(Map<String, dynamic> json) => _$PlayerImpl(
       nickname: json['nickname'] as String,
       name: json['name'] as String,
       fraction: $enumDecodeNullable(_$FractionEnumMap, json['fraction']),
-      tasks: (json['tasks'] as List<dynamic>)
-          .map((e) => Task.fromJson(e as Map<String, dynamic>))
+      tasks: (json['tasks'] as List<dynamic>?)
+          ?.map((e) => Task.fromJson(e as Map<String, dynamic>))
           .toList(),
       isAlive: json['isAlive'] as bool,
       votesNumber: (json['votesNumber'] as num).toInt(),

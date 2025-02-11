@@ -14,7 +14,7 @@ class Player with _$Player {
     required String nickname,
     required String name,
     Fraction? fraction,
-    required List<Task> tasks,
+    List<Task>? tasks,
     required bool isAlive,
     required int votesNumber,
     @TimestampConverter() DateTime? lastKillTimestamp,
@@ -25,7 +25,7 @@ class Player with _$Player {
   const Player._();
 
   bool isAllTasksDone() {
-    return tasks.every((task) => task.isDone);
+    return tasks!.every((task) => task.isDone);
   }
 
   bool isImpostor() {
