@@ -8,8 +8,10 @@ import 'package:qr_code_scanner_plus/qr_code_scanner_plus.dart';
 
 class PlayerQrView extends StatefulWidget {
   final String nickname = "Domcio";
+  final Player player;
 
-  const PlayerQrView({super.key, nickname}); // FIX To required
+  const PlayerQrView(
+      {super.key, required this.player, nickname}); // FIX To required
 
   @override
   State<PlayerQrView> createState() => _PlayerQrViewState();
@@ -67,6 +69,8 @@ class _PlayerQrViewState extends State<PlayerQrView> {
       }
 
       final String code = scanData.code!;
+
+      //if (code.contains("PLAYER") && pl
 
       if (code.contains("PLAYER")) {
         // if scanned Player is dead, change game state to emergency meeting

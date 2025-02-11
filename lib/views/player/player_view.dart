@@ -133,7 +133,7 @@ class PlayerGameView extends StatelessWidget {
               Center(
                   child: FilledButton.icon(
                 onPressed: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PlayerQrView())),
+                    MaterialPageRoute(builder: (context) => PlayerQrView(player: player,))),
                 label: Text("Skanuj kod QR"),
                 icon: Icon(Icons.camera),
               )),

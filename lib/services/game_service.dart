@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:kj_amongus/data/models/fraction/fraction.dart';
 import 'package:kj_amongus/data/models/game/game.dart';
 import 'package:kj_amongus/data/models/game_state/game_state.dart';
 import 'package:kj_amongus/data/models/task/task.dart';
@@ -93,5 +94,22 @@ class GameService {
       await _firestore.collection('games').doc('1').update({'state': state});
       return;
     }
+  }
+
+  Future<void> clearGame() async {
+    // TODO FIX
+    await _firestore.collection('games').doc('1').update({
+      'isStarted': false,
+      'state': 'lobby',
+      'allTasksNumber': 0,
+      'completedTasksNumber': 0,
+    });
+  }
+
+  Future<void> gameOver(Fraction winnerFraction) async {
+    await _firestore.collection('games').doc('1').update({
+      'state': 'gameOver',
+      'winnerFraction': winnerFraction.toString().split('.').last,
+    });
   }
 }

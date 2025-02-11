@@ -93,6 +93,8 @@ class GameView extends StatelessWidget {
                   }),
               Divider(),
               GameManagerButtons(),
+              Divider(),
+              GameOverButtons(),
             ],
           ),
         ),
@@ -248,6 +250,45 @@ class GameManagerButtons extends StatelessWidget {
               gameService.changeGameState(GameState.game);
             },
             child: Text("Głosowanie -> Gra"),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class GameOverButtons extends StatelessWidget {
+  final GameService gameService = GameService();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      //color: Colors.grey[200],
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text("Koniec gry"),
+          SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: () => gameService.gameOver(Fraction.blue),
+            child: Text("Wygrywają niebiescy"),
+            // style: ButtonStyle(
+            //     backgroundColor: MaterialStateProperty.all(Colors.blue)),
+          ),
+          SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: () => gameService.gameOver(Fraction.green),
+            child: Text("Wygrywają zieloni"),
+            // style: ButtonStyle(
+            //     backgroundColor: MaterialStateProperty.all(Colors.green)),
+          ),
+          SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: () => gameService.gameOver(Fraction.red),
+            child: Text("Wygrywają czerwoni"),
+            // style: ButtonStyle(
+            //     backgroundColor: MaterialStateProperty.all(Colors.red)),
           ),
         ],
       ),

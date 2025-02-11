@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:kj_amongus/data/models/fraction/fraction.dart';
 import 'package:kj_amongus/data/models/game_state/game_state.dart';
 import 'package:kj_amongus/services/game_service.dart';
 
@@ -16,6 +17,7 @@ class Game with _$Game {
     required int playersNumber,
     required int allTasksNumber,
     required int completedTasksNumber,
+    Fraction? winningFraction,
   }) = _Game;
 
   factory Game.fromJson(Map<String, dynamic> json) => _$GameFromJson(json);

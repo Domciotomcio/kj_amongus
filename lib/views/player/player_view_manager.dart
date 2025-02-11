@@ -52,7 +52,9 @@ class PlayerViewManager extends StatelessWidget {
                 player: player,
               );
             } else if (game.state.name == "gameOver") {
-              return PlayerGameOverView();
+              return PlayerGameOverView(
+                player: player,
+              );
             } else {
               return const Text("Blad, skontaktuj sie z prowadzacym");
             }

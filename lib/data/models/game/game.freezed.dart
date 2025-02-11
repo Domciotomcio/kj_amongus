@@ -28,6 +28,7 @@ mixin _$Game {
   int get playersNumber => throw _privateConstructorUsedError;
   int get allTasksNumber => throw _privateConstructorUsedError;
   int get completedTasksNumber => throw _privateConstructorUsedError;
+  Fraction? get winningFraction => throw _privateConstructorUsedError;
 
   /// Serializes this Game to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,7 +51,8 @@ abstract class $GameCopyWith<$Res> {
       @TimestampConverter() DateTime? emergencyMeetingStartedAt,
       int playersNumber,
       int allTasksNumber,
-      int completedTasksNumber});
+      int completedTasksNumber,
+      Fraction? winningFraction});
 }
 
 /// @nodoc
@@ -75,6 +77,7 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
     Object? playersNumber = null,
     Object? allTasksNumber = null,
     Object? completedTasksNumber = null,
+    Object? winningFraction = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -105,6 +108,10 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
           ? _value.completedTasksNumber
           : completedTasksNumber // ignore: cast_nullable_to_non_nullable
               as int,
+      winningFraction: freezed == winningFraction
+          ? _value.winningFraction
+          : winningFraction // ignore: cast_nullable_to_non_nullable
+              as Fraction?,
     ) as $Val);
   }
 }
@@ -123,7 +130,8 @@ abstract class _$$GameImplCopyWith<$Res> implements $GameCopyWith<$Res> {
       @TimestampConverter() DateTime? emergencyMeetingStartedAt,
       int playersNumber,
       int allTasksNumber,
-      int completedTasksNumber});
+      int completedTasksNumber,
+      Fraction? winningFraction});
 }
 
 /// @nodoc
@@ -145,6 +153,7 @@ class __$$GameImplCopyWithImpl<$Res>
     Object? playersNumber = null,
     Object? allTasksNumber = null,
     Object? completedTasksNumber = null,
+    Object? winningFraction = freezed,
   }) {
     return _then(_$GameImpl(
       id: null == id
@@ -175,6 +184,10 @@ class __$$GameImplCopyWithImpl<$Res>
           ? _value.completedTasksNumber
           : completedTasksNumber // ignore: cast_nullable_to_non_nullable
               as int,
+      winningFraction: freezed == winningFraction
+          ? _value.winningFraction
+          : winningFraction // ignore: cast_nullable_to_non_nullable
+              as Fraction?,
     ));
   }
 }
@@ -189,7 +202,8 @@ class _$GameImpl implements _Game {
       @TimestampConverter() this.emergencyMeetingStartedAt,
       required this.playersNumber,
       required this.allTasksNumber,
-      required this.completedTasksNumber});
+      required this.completedTasksNumber,
+      this.winningFraction});
 
   factory _$GameImpl.fromJson(Map<String, dynamic> json) =>
       _$$GameImplFromJson(json);
@@ -209,10 +223,12 @@ class _$GameImpl implements _Game {
   final int allTasksNumber;
   @override
   final int completedTasksNumber;
+  @override
+  final Fraction? winningFraction;
 
   @override
   String toString() {
-    return 'Game(id: $id, name: $name, state: $state, emergencyMeetingStartedAt: $emergencyMeetingStartedAt, playersNumber: $playersNumber, allTasksNumber: $allTasksNumber, completedTasksNumber: $completedTasksNumber)';
+    return 'Game(id: $id, name: $name, state: $state, emergencyMeetingStartedAt: $emergencyMeetingStartedAt, playersNumber: $playersNumber, allTasksNumber: $allTasksNumber, completedTasksNumber: $completedTasksNumber, winningFraction: $winningFraction)';
   }
 
   @override
@@ -231,7 +247,9 @@ class _$GameImpl implements _Game {
             (identical(other.allTasksNumber, allTasksNumber) ||
                 other.allTasksNumber == allTasksNumber) &&
             (identical(other.completedTasksNumber, completedTasksNumber) ||
-                other.completedTasksNumber == completedTasksNumber));
+                other.completedTasksNumber == completedTasksNumber) &&
+            (identical(other.winningFraction, winningFraction) ||
+                other.winningFraction == winningFraction));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -244,7 +262,8 @@ class _$GameImpl implements _Game {
       emergencyMeetingStartedAt,
       playersNumber,
       allTasksNumber,
-      completedTasksNumber);
+      completedTasksNumber,
+      winningFraction);
 
   /// Create a copy of Game
   /// with the given fields replaced by the non-null parameter values.
@@ -270,7 +289,8 @@ abstract class _Game implements Game {
       @TimestampConverter() final DateTime? emergencyMeetingStartedAt,
       required final int playersNumber,
       required final int allTasksNumber,
-      required final int completedTasksNumber}) = _$GameImpl;
+      required final int completedTasksNumber,
+      final Fraction? winningFraction}) = _$GameImpl;
 
   factory _Game.fromJson(Map<String, dynamic> json) = _$GameImpl.fromJson;
 
@@ -289,6 +309,8 @@ abstract class _Game implements Game {
   int get allTasksNumber;
   @override
   int get completedTasksNumber;
+  @override
+  Fraction? get winningFraction;
 
   /// Create a copy of Game
   /// with the given fields replaced by the non-null parameter values.

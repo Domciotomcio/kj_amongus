@@ -55,8 +55,8 @@ class _PlayerEmergencyMeetingViewState
                       final player = players[index];
                       return ListTile(
                         title: player.isAlive
-                            ? Text(player.name)
-                            : Text(player.name,
+                            ? Text(player.nickname)
+                            : Text(player.nickname,
                                 style: const TextStyle(
                                     decoration: TextDecoration.lineThrough)),
                         subtitle: Text("Liczba głosów"),
