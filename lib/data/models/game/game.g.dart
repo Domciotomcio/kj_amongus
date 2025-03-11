@@ -10,6 +10,7 @@ _$GameImpl _$$GameImplFromJson(Map<String, dynamic> json) => _$GameImpl(
       id: json['id'] as String,
       name: json['name'] as String,
       state: $enumDecode(_$GameStateEnumMap, json['state']),
+      previousState: $enumDecode(_$GameStateEnumMap, json['previousState']),
       emergencyMeetingStartedAt: _$JsonConverterFromJson<Timestamp, DateTime>(
           json['emergencyMeetingStartedAt'],
           const TimestampConverter().fromJson),
@@ -25,6 +26,7 @@ Map<String, dynamic> _$$GameImplToJson(_$GameImpl instance) =>
       'id': instance.id,
       'name': instance.name,
       'state': _$GameStateEnumMap[instance.state]!,
+      'previousState': _$GameStateEnumMap[instance.previousState]!,
       'emergencyMeetingStartedAt': _$JsonConverterToJson<Timestamp, DateTime>(
           instance.emergencyMeetingStartedAt,
           const TimestampConverter().toJson),

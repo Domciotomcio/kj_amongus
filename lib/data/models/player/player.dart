@@ -12,11 +12,12 @@ class Player with _$Player {
   const factory Player({
     required String id,
     required String nickname,
+    required String password,
     required String name,
     Fraction? fraction,
     List<Task>? tasks,
-    required bool isAlive,
-    required int votesNumber,
+    bool? isAlive,
+    int? votesNumber,
     @TimestampConverter() DateTime? lastKillTimestamp,
   }) = _Player;
 

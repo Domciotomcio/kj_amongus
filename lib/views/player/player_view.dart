@@ -33,30 +33,30 @@ class PlayerGameView extends StatelessWidget {
                   final player = snapshot.data as Player;
 
                   // Show dialog if player is not alive
-                  if (!player.isAlive) {
-                    WidgetsBinding.instance.addPostFrameCallback((_) {
-                      showDialog(
-                        context: context,
-                        barrierDismissible:
-                            false, // Prevent dismissing by tapping outside
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            backgroundColor: Colors.red,
-                            title: Text('Nie żyjesz'),
-                            content: Text('Dokończ swoje zadani jako duch'),
-                            actions: <Widget>[
-                              TextButton(
-                                child: Text('OK'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    });
-                  }
+                  // if (!player.isAlive) {
+                  //   WidgetsBinding.instance.addPostFrameCallback((_) {
+                  //     showDialog(
+                  //       context: context,
+                  //       barrierDismissible:
+                  //           false, // Prevent dismissing by tapping outside
+                  //       builder: (BuildContext context) {
+                  //         return AlertDialog(
+                  //           backgroundColor: Colors.red,
+                  //           title: Text('Nie żyjesz'),
+                  //           content: Text('Dokończ swoje zadani jako duch'),
+                  //           actions: <Widget>[
+                  //             TextButton(
+                  //               child: Text('OK'),
+                  //               onPressed: () {
+                  //                 Navigator.of(context).pop();
+                  //               },
+                  //             ),
+                  //           ],
+                  //         );
+                  //       },
+                  //     );
+                  //   });
+                  // }
 
                   return Body(player, context);
                 } else {
@@ -95,18 +95,18 @@ class PlayerGameView extends StatelessWidget {
                 Text("Spytaj prowadzącego z jakiej frakcji jesteś"),
               Divider(),
               Text("Stan"),
-              ListTile(
-                title: player.isAlive
-                    ? Text(
-                        "Dalej żyjesz",
-                        style: TextStyle(color: Colors.green),
-                      )
-                    : Text(
-                        "Nie żyjesz",
-                        style: TextStyle(color: Colors.red),
-                      ),
-                subtitle: Text("Pamiętaj, by zrealizować wszystkie zadania"),
-              ),
+              // ListTile(
+              //   title: player.isAlive
+              //       ? Text(
+              //           "Dalej żyjesz",
+              //           style: TextStyle(color: Colors.green),
+              //         )
+              //       : Text(
+              //           "Nie żyjesz",
+              //           style: TextStyle(color: Colors.red),
+              //         ),
+              //   subtitle: Text("Pamiętaj, by zrealizować wszystkie zadania"),
+              // ),
               Divider(),
               Text("Twoje zadania"),
               // if all tasks completed
@@ -127,20 +127,21 @@ class PlayerGameView extends StatelessWidget {
                   ),
                   subtitle: Text(task.description),
                   trailing: task.isDone ? Icon(Icons.check) : Icon(Icons.close),
-                  onTap: () => playerService.completeTask(player.id, task.id),
+                  // onTap: () => playerService.completeTask(player.id, task.id),
                 ),
               Divider(),
-              Center(
-                  child: FilledButton.icon(
-                onPressed: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => PlayerQrView(
-                              player: player,
-                            ))),
-                label: Text("Skanuj kod QR"),
-                icon: Icon(Icons.camera),
-              )),
+              // Center(
+              //     child: FilledButton.icon(
+              //   onPressed: () => Navigator.push(
+              //       context,
+              //       // MaterialPageRoute(
+              //       //     builder: (context) => PlayerQrView(
+              //       //           player: player,
+              //       //         )),
+              //               ),
+              //   label: Text("Skanuj kod QR"),
+              //   icon: Icon(Icons.camera),
+              // )),
             ],
           ),
         ),

@@ -13,6 +13,7 @@ class Game with _$Game {
     required String id,
     required String name,
     required GameState state,
+    required GameState previousState,
     @TimestampConverter() DateTime? emergencyMeetingStartedAt,
     required int playersNumber,
     required int allTasksNumber,

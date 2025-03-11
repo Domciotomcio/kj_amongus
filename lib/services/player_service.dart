@@ -1,54 +1,69 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kj_amongus/constants/const.dart';
-import 'package:kj_amongus/constants/players_id_list.dart';
 import 'package:kj_amongus/constants/task_templates.dart';
 import 'package:kj_amongus/data/models/game_state/game_state.dart';
 import 'package:kj_amongus/data/models/player/player.dart';
 import 'package:kj_amongus/data/models/task/task.dart';
 import 'package:kj_amongus/data/models/task/task_template.dart';
+import 'package:kj_amongus/services/functions/handle_firestore_error.dart';
 import 'package:kj_amongus/services/game_service.dart';
 import 'package:uuid/uuid.dart';
 
 class PlayerService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  CollectionReference<Player> get playersCollection =>
+      _firestore.collection('players').withConverter(
+            fromFirestore: (snapshot, _) => Player.fromJson(snapshot.data()!),
+            toFirestore: (player, _) => player.toJson(),
+          );
 
-  Future<void> createPlayer(String nickname, String name) async {
-    // get list of players length
-    final playersLength = (await _firestore.collection('players').get()).size;
+  Future<Player?> getPlayer(String id) async {
+    return handleFirestoreError<Player?>("fetching player", () async {
+      final docSnapshot = await playersCollection.doc(id).get();
 
-    final id = playersIdList[playersLength];
+      return docSnapshot.exists ? docSnapshot.data() : null;
+    });
+  }
 
-    final player = Player(
-        id: id,
-        nickname: nickname,
-        name: name,
-        tasks: [],
-        isAlive: true,
-        fraction: null,
-        votesNumber: 0);
+  Future<Player?> getPlayerByNickname(String nickname) async {
+    return handleFirestoreError<Player?>("fetching player by nickname",
+        () async {
+      final querySnapshot = await playersCollection
+          .where('nickname', isEqualTo: nickname)
+          .limit(1)
+          .get();
 
-    await _firestore.collection('players').doc(id).set(player.toJson());
+      return querySnapshot.docs.isNotEmpty
+          ? querySnapshot.docs.first.data()
+          : null;
+    });
+  }
+
+  // manage players section
+  Future<bool> createPlayer(Player p) async {
+    return await handleFirestoreError<bool>("creating player", () async {
+          final querySnapshot = await getPlayerByNickname(p.nickname);
+
+          if (querySnapshot != null) {
+            return false;
+          }
+
+          await playersCollection.doc(p.id).set(p);
+          return true;
+        }) ??
+        false;
+  }
+
+  Stream<Player> streamPlayer(String id) {
+    return playersCollection.doc(id).snapshots().map((snapshot) {
+      return snapshot.data()!;
+    });
   }
 
   Stream<Player> getPlayerStream(String id) {
     return _firestore.collection('players').doc(id).snapshots().map((snapshot) {
       return Player.fromJson(snapshot.data()!);
     });
-  }
-
-  Future<Player> getPlayer(String id) {
-    return _firestore.collection('players').doc(id).get().then((snapshot) {
-      return Player.fromJson(snapshot.data()!);
-    });
-  }
-
-  Future<Player> getPlayerByNickname(String nickname) async {
-    final players = await _firestore.collection('players').get();
-    final player = players.docs.firstWhere(
-        (player) => player.data()['nickname'] == nickname,
-        orElse: () => throw Exception('Player not found'));
-
-    return Player.fromJson(player.data());
   }
 
   Stream<List<Player>> getPlayersStream() {
@@ -67,6 +82,8 @@ class PlayerService {
   }
 
   Future<bool> updatePlayer(Player player) async {
+    print(player.toJson());
+
     await _firestore
         .collection('players')
         .doc(player.id)
@@ -106,6 +123,10 @@ class PlayerService {
     final players = await _firestore.collection('players').get();
 
     for (final player in players.docs) {
+      if (player.data()['fraction'] == 'red') {
+        continue;
+      }
+
       final shuffledTemplates = List<TaskTemplate>.from(taskTemplatesLong)
         ..shuffle();
       final selectedTemplates =
@@ -126,7 +147,11 @@ class PlayerService {
     }
   }
 
-  Future<void> killPlayer(String playerId) async {
+  Future<void> killPlayer(String playerId, Player killingPlayer) async {
+    await _firestore.collection('players').doc(killingPlayer.id).update({
+      'lastKillTimestamp': DateTime.now(),
+    });
+
     await _firestore.collection('players').doc(playerId).update({
       'isAlive': false,
     });
@@ -168,6 +193,16 @@ class PlayerService {
         .then((snapshot) {
       final mostVotedPlayer = snapshot.docs.first;
       return mostVotedPlayer.id == id;
+    });
+  }
+
+  Future<void> resetAllTasks() {
+    return _firestore.collection('players').get().then((snapshot) {
+      for (final player in snapshot.docs) {
+        player.reference.update({
+          'tasks': [],
+        });
+      }
     });
   }
 }

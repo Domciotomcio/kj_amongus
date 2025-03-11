@@ -36,7 +36,9 @@ Future<bool> assignFraction() async {
     } else {
       players[i] = players[i].copyWith(fraction: Fraction.red);
     }
+    print("Przed update player");
     await playerService.updatePlayer(players[i]);
+    print("Po update player");
   }
   return true;
 }

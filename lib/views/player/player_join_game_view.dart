@@ -27,7 +27,7 @@ class PlayerJoinGameView extends StatelessWidget {
               TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Nickname',
+                  labelText: 'Nickname (unikalny)',
                 ),
                 controller: nicknameController,
               ),
@@ -35,7 +35,7 @@ class PlayerJoinGameView extends StatelessWidget {
               TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Name',
+                  labelText: 'Imię',
                 ),
                 controller: nameController,
               ),
@@ -65,21 +65,21 @@ class PlayerJoinGameView extends StatelessWidget {
 
                   if (!isPlayerExists) {
                     // player not found, create new player
-                    await playerService.createPlayer(
-                        nicknameController.text.toUpperCase(),
-                        nameController.text);
+                    // await playerService.createPlayer(
+                    //     nicknameController.text.toUpperCase(),
+                    //     nameController.text);
                   }
 
-                  Player player = await playerService.getPlayerByNickname(
-                      nicknameController.text.toUpperCase());
+                  // Player player = await playerService.getPlayerByNickname(
+                  //     nicknameController.text.toUpperCase());
 
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => PlayerViewManager(
-                                player: player,
-                              )),
-                      (route) => false);
+                  // Navigator.pushAndRemoveUntil(
+                  //     context,
+                  //     MaterialPageRoute(
+                  //         builder: (context) => PlayerViewManager(
+                  //               player: player,
+                  //             )),
+                  //     (route) => false);
                 },
                 child: Text('Dołącz do gry'),
               ),

@@ -22,11 +22,12 @@ Player _$PlayerFromJson(Map<String, dynamic> json) {
 mixin _$Player {
   String get id => throw _privateConstructorUsedError;
   String get nickname => throw _privateConstructorUsedError;
+  String get password => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   Fraction? get fraction => throw _privateConstructorUsedError;
   List<Task>? get tasks => throw _privateConstructorUsedError;
-  bool get isAlive => throw _privateConstructorUsedError;
-  int get votesNumber => throw _privateConstructorUsedError;
+  bool? get isAlive => throw _privateConstructorUsedError;
+  int? get votesNumber => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime? get lastKillTimestamp => throw _privateConstructorUsedError;
 
@@ -47,11 +48,12 @@ abstract class $PlayerCopyWith<$Res> {
   $Res call(
       {String id,
       String nickname,
+      String password,
       String name,
       Fraction? fraction,
       List<Task>? tasks,
-      bool isAlive,
-      int votesNumber,
+      bool? isAlive,
+      int? votesNumber,
       @TimestampConverter() DateTime? lastKillTimestamp});
 }
 
@@ -72,11 +74,12 @@ class _$PlayerCopyWithImpl<$Res, $Val extends Player>
   $Res call({
     Object? id = null,
     Object? nickname = null,
+    Object? password = null,
     Object? name = null,
     Object? fraction = freezed,
     Object? tasks = freezed,
-    Object? isAlive = null,
-    Object? votesNumber = null,
+    Object? isAlive = freezed,
+    Object? votesNumber = freezed,
     Object? lastKillTimestamp = freezed,
   }) {
     return _then(_value.copyWith(
@@ -87,6 +90,10 @@ class _$PlayerCopyWithImpl<$Res, $Val extends Player>
       nickname: null == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -100,14 +107,14 @@ class _$PlayerCopyWithImpl<$Res, $Val extends Player>
           ? _value.tasks
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<Task>?,
-      isAlive: null == isAlive
+      isAlive: freezed == isAlive
           ? _value.isAlive
           : isAlive // ignore: cast_nullable_to_non_nullable
-              as bool,
-      votesNumber: null == votesNumber
+              as bool?,
+      votesNumber: freezed == votesNumber
           ? _value.votesNumber
           : votesNumber // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       lastKillTimestamp: freezed == lastKillTimestamp
           ? _value.lastKillTimestamp
           : lastKillTimestamp // ignore: cast_nullable_to_non_nullable
@@ -126,11 +133,12 @@ abstract class _$$PlayerImplCopyWith<$Res> implements $PlayerCopyWith<$Res> {
   $Res call(
       {String id,
       String nickname,
+      String password,
       String name,
       Fraction? fraction,
       List<Task>? tasks,
-      bool isAlive,
-      int votesNumber,
+      bool? isAlive,
+      int? votesNumber,
       @TimestampConverter() DateTime? lastKillTimestamp});
 }
 
@@ -149,11 +157,12 @@ class __$$PlayerImplCopyWithImpl<$Res>
   $Res call({
     Object? id = null,
     Object? nickname = null,
+    Object? password = null,
     Object? name = null,
     Object? fraction = freezed,
     Object? tasks = freezed,
-    Object? isAlive = null,
-    Object? votesNumber = null,
+    Object? isAlive = freezed,
+    Object? votesNumber = freezed,
     Object? lastKillTimestamp = freezed,
   }) {
     return _then(_$PlayerImpl(
@@ -164,6 +173,10 @@ class __$$PlayerImplCopyWithImpl<$Res>
       nickname: null == nickname
           ? _value.nickname
           : nickname // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -177,14 +190,14 @@ class __$$PlayerImplCopyWithImpl<$Res>
           ? _value._tasks
           : tasks // ignore: cast_nullable_to_non_nullable
               as List<Task>?,
-      isAlive: null == isAlive
+      isAlive: freezed == isAlive
           ? _value.isAlive
           : isAlive // ignore: cast_nullable_to_non_nullable
-              as bool,
-      votesNumber: null == votesNumber
+              as bool?,
+      votesNumber: freezed == votesNumber
           ? _value.votesNumber
           : votesNumber // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       lastKillTimestamp: freezed == lastKillTimestamp
           ? _value.lastKillTimestamp
           : lastKillTimestamp // ignore: cast_nullable_to_non_nullable
@@ -199,11 +212,12 @@ class _$PlayerImpl extends _Player {
   const _$PlayerImpl(
       {required this.id,
       required this.nickname,
+      required this.password,
       required this.name,
       this.fraction,
       final List<Task>? tasks,
-      required this.isAlive,
-      required this.votesNumber,
+      this.isAlive,
+      this.votesNumber,
       @TimestampConverter() this.lastKillTimestamp})
       : _tasks = tasks,
         super._();
@@ -215,6 +229,8 @@ class _$PlayerImpl extends _Player {
   final String id;
   @override
   final String nickname;
+  @override
+  final String password;
   @override
   final String name;
   @override
@@ -230,16 +246,16 @@ class _$PlayerImpl extends _Player {
   }
 
   @override
-  final bool isAlive;
+  final bool? isAlive;
   @override
-  final int votesNumber;
+  final int? votesNumber;
   @override
   @TimestampConverter()
   final DateTime? lastKillTimestamp;
 
   @override
   String toString() {
-    return 'Player(id: $id, nickname: $nickname, name: $name, fraction: $fraction, tasks: $tasks, isAlive: $isAlive, votesNumber: $votesNumber, lastKillTimestamp: $lastKillTimestamp)';
+    return 'Player(id: $id, nickname: $nickname, password: $password, name: $name, fraction: $fraction, tasks: $tasks, isAlive: $isAlive, votesNumber: $votesNumber, lastKillTimestamp: $lastKillTimestamp)';
   }
 
   @override
@@ -250,6 +266,8 @@ class _$PlayerImpl extends _Player {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.nickname, nickname) ||
                 other.nickname == nickname) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.fraction, fraction) ||
                 other.fraction == fraction) &&
@@ -267,6 +285,7 @@ class _$PlayerImpl extends _Player {
       runtimeType,
       id,
       nickname,
+      password,
       name,
       fraction,
       const DeepCollectionEquality().hash(_tasks),
@@ -294,11 +313,12 @@ abstract class _Player extends Player {
   const factory _Player(
       {required final String id,
       required final String nickname,
+      required final String password,
       required final String name,
       final Fraction? fraction,
       final List<Task>? tasks,
-      required final bool isAlive,
-      required final int votesNumber,
+      final bool? isAlive,
+      final int? votesNumber,
       @TimestampConverter() final DateTime? lastKillTimestamp}) = _$PlayerImpl;
   const _Player._() : super._();
 
@@ -309,15 +329,17 @@ abstract class _Player extends Player {
   @override
   String get nickname;
   @override
+  String get password;
+  @override
   String get name;
   @override
   Fraction? get fraction;
   @override
   List<Task>? get tasks;
   @override
-  bool get isAlive;
+  bool? get isAlive;
   @override
-  int get votesNumber;
+  int? get votesNumber;
   @override
   @TimestampConverter()
   DateTime? get lastKillTimestamp;

@@ -216,6 +216,7 @@ class PlayersSettingWidget extends StatelessWidget {
 
 class GameManagerButtons extends StatelessWidget {
   final GameService gameService = GameService();
+  final PlayerService playerService = PlayerService();
 
   @override
   Widget build(BuildContext context) {
@@ -237,22 +238,14 @@ class GameManagerButtons extends StatelessWidget {
           SizedBox(height: 10),
           ElevatedButton(
               onPressed: () => assignTasks(), child: Text("Assign Tasks")),
+          ElevatedButton(
+              onPressed: () => playerService.resetAllTasks(),
+              child: Text("Reset Tasks")),
           Divider(),
           Text("Zarządzanie grą"),
           FilledButton(
-              onPressed: () async {
-                // start game
-                final gameStarted = await gameService.startGame();
-                if (gameStarted) {
-                  // show snackbar
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(SnackBar(content: Text("Game started")));
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text("Error starting game")));
-                }
-              },
-              child: Text("Start gry")),
+              onPressed: () => gameService.startGame(),
+              child: Text("Start gryyy")),
           SizedBox(height: 10),
           FilledButton(
             onPressed: () async {

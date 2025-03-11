@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kj_amongus/firebase_options.dart';
 import 'package:kj_amongus/views/game_manager/game_manager_view.dart';
+import 'package:kj_amongus/views/login_view.dart';
 import 'package:kj_amongus/views/player/emergency_meeting/player_emergency_meeting_summary_view.dart';
 import 'package:kj_amongus/views/player/emergency_meeting/player_emergency_meeting_view.dart';
 import 'package:kj_amongus/views/player/player_impostor_view.dart';
@@ -18,7 +20,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -29,45 +31,57 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      // theme: ThemeData(
+      //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      //   useMaterial3: true,
+      //   textTheme: GoogleFonts.amaticScTextTheme(),
+      // ),
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-        textTheme: GoogleFonts.amaticScTextTheme(),
-      ),
+          useMaterial3: true,
+          fontFamily: 'The Godfather',
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber)),
+      themeMode: ThemeMode.dark,
       darkTheme: ThemeData(
-          //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           brightness: Brightness.dark,
           useMaterial3: true,
-          textTheme: GoogleFonts.amaticScTextTheme()
-              .apply(bodyColor: Colors.white)
-              .copyWith(
-                bodyLarge: GoogleFonts.amaticSc(
-                    fontSize: 28,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-                bodyMedium: GoogleFonts.amaticSc(
-                    fontSize: 24,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-                bodySmall: GoogleFonts.amaticSc(
-                    fontSize: 20,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold),
-                titleLarge: GoogleFonts.amaticSc(
-                    fontSize: 36,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
-              )),
-      themeMode: ThemeMode.dark,
+          //fontFamily: 'The Godfather',
+          fontFamily: GoogleFonts.lora().fontFamily,
+          colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.amber, brightness: Brightness.dark)),
+      // darkTheme: ThemeData(
+      //     //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+      //     brightness: Brightness.dark,
+      //     useMaterial3: true,
+      //     textTheme: GoogleFonts.amaticScTextTheme()
+      //         .apply(bodyColor: Colors.white)
+      //         .copyWith(
+      //           bodyLarge: GoogleFonts.amaticSc(
+      //               fontSize: 28,
+      //               color: Colors.white,
+      //               fontWeight: FontWeight.bold),
+      //           bodyMedium: GoogleFonts.amaticSc(
+      //               fontSize: 24,
+      //               color: Colors.white,
+      //               fontWeight: FontWeight.bold),
+      //           bodySmall: GoogleFonts.amaticSc(
+      //               fontSize: 20,
+      //               color: Colors.white,
+      //               fontWeight: FontWeight.bold),
+      //           titleLarge: GoogleFonts.amaticSc(
+      //               fontSize: 36,
+      //               fontWeight: FontWeight.bold,
+      //               color: Colors.white),
+      //         )),
       //home: PlayerTestView(),
       // home: GameView(),
       //home: PlayerView(),
-      home: PlayerJoinGameView(),
+      //home: PlayerJoinGameView(),
       //home: PlayerViewManager(),
       //home: PlayerQrView(),
       // home: MyHomePage(title: "Title"),
       // home: PlayerImpostorView(),
       // home: PlayerEmergencyMeetingSummaryView(),
+      home: LoginView(),
     );
   }
 }

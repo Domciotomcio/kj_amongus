@@ -1,4 +1,5 @@
 import 'package:kj_amongus/constants/task_templates.dart';
+import 'package:kj_amongus/data/models/fraction/fraction.dart';
 import 'package:kj_amongus/data/models/player/player.dart';
 import 'package:kj_amongus/data/models/task/task.dart';
 import 'package:kj_amongus/services/player_service.dart';
@@ -57,6 +58,9 @@ Future<bool> assignTasks() async {
     // update player
     print("Before update");
     print(players[i]);
+    if (players[i].fraction == Fraction.red) {
+      continue;
+    }
     await playerService.updatePlayerTasks(players[i].id, newTasks);
     print("After update");
   }

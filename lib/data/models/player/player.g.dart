@@ -9,13 +9,14 @@ part of 'player.dart';
 _$PlayerImpl _$$PlayerImplFromJson(Map<String, dynamic> json) => _$PlayerImpl(
       id: json['id'] as String,
       nickname: json['nickname'] as String,
+      password: json['password'] as String,
       name: json['name'] as String,
       fraction: $enumDecodeNullable(_$FractionEnumMap, json['fraction']),
       tasks: (json['tasks'] as List<dynamic>?)
           ?.map((e) => Task.fromJson(e as Map<String, dynamic>))
           .toList(),
-      isAlive: json['isAlive'] as bool,
-      votesNumber: (json['votesNumber'] as num).toInt(),
+      isAlive: json['isAlive'] as bool?,
+      votesNumber: (json['votesNumber'] as num?)?.toInt(),
       lastKillTimestamp: _$JsonConverterFromJson<Timestamp, DateTime>(
           json['lastKillTimestamp'], const TimestampConverter().fromJson),
     );
@@ -24,6 +25,7 @@ Map<String, dynamic> _$$PlayerImplToJson(_$PlayerImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'nickname': instance.nickname,
+      'password': instance.password,
       'name': instance.name,
       'fraction': _$FractionEnumMap[instance.fraction],
       'tasks': instance.tasks,

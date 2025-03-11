@@ -4,6 +4,7 @@ import 'package:kj_amongus/constants/fake_tasks.dart';
 import 'package:kj_amongus/data/models/player/player.dart';
 import 'package:kj_amongus/services/functions/sabotate_engines.dart';
 import 'package:kj_amongus/services/player_service.dart';
+import 'package:kj_amongus/views/player/player_qr_view.dart';
 import 'package:kj_amongus/widgets/sabotage_widget.dart';
 
 class PlayerImpostorView extends StatelessWidget {
@@ -68,7 +69,7 @@ class PlayerImpostorView extends StatelessWidget {
                       },
                     ),
                   Divider(),
-                  KillCountdownTimer(startTime: DateTime.now()),
+                  KillCountdownTimer(startTime: DateTime.now(), player: player),
                   Divider(),
                   SabotageCountdownTimer(startTime: DateTime.now()),
                 ],
@@ -81,8 +82,9 @@ class PlayerImpostorView extends StatelessWidget {
 
 class KillCountdownTimer extends StatelessWidget {
   final DateTime startTime;
+  final Player player;
 
-  KillCountdownTimer({required this.startTime});
+  KillCountdownTimer({required this.startTime, required this.player});
 
   Stream<int> _countdownStream() async* {
     while (true) {
@@ -115,11 +117,11 @@ class KillCountdownTimer extends StatelessWidget {
                   : "Pora kogoś wyeliminować!",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            if (remaining <= 0)
-              ElevatedButton(
-                onPressed: null,
-                child: Text("Eliminuj"),
-              ),
+            // if (remaining <= 0)
+            //   ElevatedButton(
+            //     onPressed: () => PlayerQrView(player: player),
+            //     child: Text("Eliminuj"),
+            //   ),
           ],
         );
       },

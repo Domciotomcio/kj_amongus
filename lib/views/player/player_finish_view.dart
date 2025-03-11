@@ -38,6 +38,7 @@ class PlayerGameOverView extends StatelessWidget {
                 Text(game.winnerFraction!.name,
                     style: TextStyle(
                         color: game.winnerFraction!.color, fontSize: 48)),
+                Text("Wróć do cafeterii"),
               ],
             );
           },

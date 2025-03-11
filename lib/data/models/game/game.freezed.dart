@@ -23,6 +23,7 @@ mixin _$Game {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   GameState get state => throw _privateConstructorUsedError;
+  GameState get previousState => throw _privateConstructorUsedError;
   @TimestampConverter()
   DateTime? get emergencyMeetingStartedAt => throw _privateConstructorUsedError;
   int get playersNumber => throw _privateConstructorUsedError;
@@ -48,6 +49,7 @@ abstract class $GameCopyWith<$Res> {
       {String id,
       String name,
       GameState state,
+      GameState previousState,
       @TimestampConverter() DateTime? emergencyMeetingStartedAt,
       int playersNumber,
       int allTasksNumber,
@@ -73,6 +75,7 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
     Object? id = null,
     Object? name = null,
     Object? state = null,
+    Object? previousState = null,
     Object? emergencyMeetingStartedAt = freezed,
     Object? playersNumber = null,
     Object? allTasksNumber = null,
@@ -91,6 +94,10 @@ class _$GameCopyWithImpl<$Res, $Val extends Game>
       state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
+              as GameState,
+      previousState: null == previousState
+          ? _value.previousState
+          : previousState // ignore: cast_nullable_to_non_nullable
               as GameState,
       emergencyMeetingStartedAt: freezed == emergencyMeetingStartedAt
           ? _value.emergencyMeetingStartedAt
@@ -127,6 +134,7 @@ abstract class _$$GameImplCopyWith<$Res> implements $GameCopyWith<$Res> {
       {String id,
       String name,
       GameState state,
+      GameState previousState,
       @TimestampConverter() DateTime? emergencyMeetingStartedAt,
       int playersNumber,
       int allTasksNumber,
@@ -149,6 +157,7 @@ class __$$GameImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? state = null,
+    Object? previousState = null,
     Object? emergencyMeetingStartedAt = freezed,
     Object? playersNumber = null,
     Object? allTasksNumber = null,
@@ -167,6 +176,10 @@ class __$$GameImplCopyWithImpl<$Res>
       state: null == state
           ? _value.state
           : state // ignore: cast_nullable_to_non_nullable
+              as GameState,
+      previousState: null == previousState
+          ? _value.previousState
+          : previousState // ignore: cast_nullable_to_non_nullable
               as GameState,
       emergencyMeetingStartedAt: freezed == emergencyMeetingStartedAt
           ? _value.emergencyMeetingStartedAt
@@ -199,6 +212,7 @@ class _$GameImpl implements _Game {
       {required this.id,
       required this.name,
       required this.state,
+      required this.previousState,
       @TimestampConverter() this.emergencyMeetingStartedAt,
       required this.playersNumber,
       required this.allTasksNumber,
@@ -215,6 +229,8 @@ class _$GameImpl implements _Game {
   @override
   final GameState state;
   @override
+  final GameState previousState;
+  @override
   @TimestampConverter()
   final DateTime? emergencyMeetingStartedAt;
   @override
@@ -228,7 +244,7 @@ class _$GameImpl implements _Game {
 
   @override
   String toString() {
-    return 'Game(id: $id, name: $name, state: $state, emergencyMeetingStartedAt: $emergencyMeetingStartedAt, playersNumber: $playersNumber, allTasksNumber: $allTasksNumber, completedTasksNumber: $completedTasksNumber, winnerFraction: $winnerFraction)';
+    return 'Game(id: $id, name: $name, state: $state, previousState: $previousState, emergencyMeetingStartedAt: $emergencyMeetingStartedAt, playersNumber: $playersNumber, allTasksNumber: $allTasksNumber, completedTasksNumber: $completedTasksNumber, winnerFraction: $winnerFraction)';
   }
 
   @override
@@ -239,6 +255,8 @@ class _$GameImpl implements _Game {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.state, state) || other.state == state) &&
+            (identical(other.previousState, previousState) ||
+                other.previousState == previousState) &&
             (identical(other.emergencyMeetingStartedAt,
                     emergencyMeetingStartedAt) ||
                 other.emergencyMeetingStartedAt == emergencyMeetingStartedAt) &&
@@ -259,6 +277,7 @@ class _$GameImpl implements _Game {
       id,
       name,
       state,
+      previousState,
       emergencyMeetingStartedAt,
       playersNumber,
       allTasksNumber,
@@ -286,6 +305,7 @@ abstract class _Game implements Game {
       {required final String id,
       required final String name,
       required final GameState state,
+      required final GameState previousState,
       @TimestampConverter() final DateTime? emergencyMeetingStartedAt,
       required final int playersNumber,
       required final int allTasksNumber,
@@ -300,6 +320,8 @@ abstract class _Game implements Game {
   String get name;
   @override
   GameState get state;
+  @override
+  GameState get previousState;
   @override
   @TimestampConverter()
   DateTime? get emergencyMeetingStartedAt;
