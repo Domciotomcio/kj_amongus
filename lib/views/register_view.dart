@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kj_amongus/data/models/player/player.dart';
-import 'package:kj_amongus/services/auth_service.dart';
+import 'package:kj_amongus/services/firestore/auth_service.dart';
 import 'package:kj_amongus/services/providers/auth_service_provider.dart';
 
 class RegisterView extends HookConsumerWidget {

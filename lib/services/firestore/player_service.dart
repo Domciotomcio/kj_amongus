@@ -6,7 +6,7 @@ import 'package:kj_amongus/data/models/player/player.dart';
 import 'package:kj_amongus/data/models/task/task.dart';
 import 'package:kj_amongus/data/models/task/task_template.dart';
 import 'package:kj_amongus/services/functions/handle_firestore_error.dart';
-import 'package:kj_amongus/services/game_service.dart';
+import 'package:kj_amongus/services/firestore/game_service.dart';
 import 'package:uuid/uuid.dart';
 
 class PlayerService {

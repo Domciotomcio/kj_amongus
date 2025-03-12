@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kj_amongus/data/models/player/player.dart';
 import 'package:kj_amongus/services/functions/handle_firestore_error.dart';
-import 'package:kj_amongus/services/player_service.dart';
+import 'package:kj_amongus/services/firestore/player_service.dart';
 
 class AuthService {
   final PlayerService playerService;

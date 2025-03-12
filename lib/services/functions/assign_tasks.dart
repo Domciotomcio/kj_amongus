@@ -2,7 +2,7 @@ import 'package:kj_amongus/constants/task_templates.dart';
 import 'package:kj_amongus/data/models/fraction/fraction.dart';
 import 'package:kj_amongus/data/models/player/player.dart';
 import 'package:kj_amongus/data/models/task/task.dart';
-import 'package:kj_amongus/services/player_service.dart';
+import 'package:kj_amongus/services/firestore/player_service.dart';
 
 Future<bool> assignTasks() async {
   final PlayerService playerService = PlayerService();

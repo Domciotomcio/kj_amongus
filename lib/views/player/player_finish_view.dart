@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kj_amongus/data/models/fraction/fraction.dart';
 import 'package:kj_amongus/data/models/game/game.dart';
 import 'package:kj_amongus/data/models/player/player.dart';
-import 'package:kj_amongus/services/game_service.dart';
+import 'package:kj_amongus/services/firestore/game_service.dart';
 
 class PlayerGameOverView extends StatelessWidget {
   final Player player;

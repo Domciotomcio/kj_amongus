@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kj_amongus/services/notifiers/player_notifier.dart';
 import 'package:kj_amongus/services/providers/auth_service_provider.dart';
-import 'package:kj_amongus/services/providers/player_service_provider.dart';
+import 'package:kj_amongus/views/player/player_view.dart';
 import 'package:kj_amongus/views/register_view.dart';
 
 class LoginView extends HookConsumerWidget {
@@ -11,11 +13,50 @@ class LoginView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final playerService = ref.watch(playerServiceProvider);
     final authService = ref.watch(authServiceProvider);
 
     final nicknameController = useTextEditingController();
     final passwordController = useTextEditingController();
+
+    final isLoading = useState(false);
+
+    Future<void> login() async {
+      isLoading.value = true;
+
+      final player = await authService.login(
+          nicknameController.text, passwordController.text);
+
+      log(player.toString());
+
+      if (!context.mounted) {
+        return; // Ensure the widget is still mounted before using `context`
+      } else if (player == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Nie udało się zalogować'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      } else {
+        // user logged in
+        ref.read(playerStateProvider.notifier).loadPlayer(player);
+
+        log(ref.watch(playerStateProvider).toString());
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Zalogowano pomyślnie'),
+            backgroundColor: Colors.green,
+          ),
+        );
+
+        Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => PlayerView()),
+            (route) => false);
+      }
+
+      isLoading.value = false;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -56,8 +97,7 @@ class LoginView extends HookConsumerWidget {
             ),
             SizedBox(height: 20),
             FilledButton.icon(
-                onPressed: () => ref.read(playerProvider.notifier).login(
-                    nicknameController.text, passwordController.text, ref),
+                onPressed: () => isLoading.value ? null : login(),
                 label: Text("Zaloguj"),
                 icon: Icon(Icons.login)),
           ],

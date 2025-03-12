@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kj_amongus/data/models/fraction/fraction.dart';
 import 'package:kj_amongus/data/models/game/game.dart';
 import 'package:kj_amongus/data/models/player/player.dart';
-import 'package:kj_amongus/services/game_service.dart';
-import 'package:kj_amongus/services/player_service.dart';
+import 'package:kj_amongus/services/firestore/game_service.dart';
+import 'package:kj_amongus/services/firestore/player_service.dart';
 import 'package:kj_amongus/views/player/emergency_meeting/player_emergency_meeting_summary_view.dart';
 import 'package:kj_amongus/views/player/emergency_meeting/player_emergency_meeting_view.dart';
 import 'package:kj_amongus/views/player/player_finish_view.dart';
@@ -11,7 +11,7 @@ import 'package:kj_amongus/views/player/player_impostor_view.dart';
 import 'package:kj_amongus/views/player/player_killed_view.dart';
 import 'package:kj_amongus/views/player/player_lobby_view.dart';
 import 'package:kj_amongus/views/player/player_sabotage_view.dart';
-import 'package:kj_amongus/views/player/player_view.dart';
+import 'package:kj_amongus/views/player/player_game_view.dart';
 import 'package:rxdart/rxdart.dart';
 
 class PlayerViewManager extends StatelessWidget {

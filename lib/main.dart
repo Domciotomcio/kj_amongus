@@ -10,9 +10,10 @@ import 'package:kj_amongus/views/player/emergency_meeting/player_emergency_meeti
 import 'package:kj_amongus/views/player/player_impostor_view.dart';
 import 'package:kj_amongus/views/player/player_join_game_view.dart';
 import 'package:kj_amongus/views/player/player_qr_view.dart';
+import 'package:kj_amongus/views/player/player_view.dart';
 import 'package:kj_amongus/views/player/player_view_manager.dart';
 import 'package:kj_amongus/views/player_test_view.dart';
-import 'package:kj_amongus/views/player/player_view.dart';
+import 'package:kj_amongus/views/player/player_game_view.dart';
 import 'package:kj_amongus/views/test/test_view.dart';
 
 void main() async {
@@ -81,7 +82,8 @@ class MyApp extends StatelessWidget {
       // home: MyHomePage(title: "Title"),
       // home: PlayerImpostorView(),
       // home: PlayerEmergencyMeetingSummaryView(),
-      home: LoginView(),
+      // home: LoginView(),
+      home: PlayerView(),
     );
   }
 }

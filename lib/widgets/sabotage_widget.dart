@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kj_amongus/data/models/game/game.dart';
 import 'package:kj_amongus/data/models/game_state/game_state.dart';
-import 'package:kj_amongus/services/game_service.dart';
+import 'package:kj_amongus/services/firestore/game_service.dart';
 
 class SabotageWidget extends StatelessWidget {
   final GameService gameService = GameService();

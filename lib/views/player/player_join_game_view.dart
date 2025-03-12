@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kj_amongus/data/models/player/player.dart';
-import 'package:kj_amongus/services/game_service.dart';
-import 'package:kj_amongus/services/player_service.dart';
+import 'package:kj_amongus/services/firestore/game_service.dart';
+import 'package:kj_amongus/services/firestore/player_service.dart';
 import 'package:kj_amongus/views/game_manager/game_manager_view.dart';
 import 'package:kj_amongus/views/player/player_view_manager.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kj_amongus/data/models/player/player.dart';
-import 'package:kj_amongus/services/player_service.dart';
+import 'package:kj_amongus/services/firestore/player_service.dart';
 
 class GameManagerPlayerView extends StatelessWidget {
   final PlayerService playerService = PlayerService();

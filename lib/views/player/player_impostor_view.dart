@@ -3,7 +3,7 @@ import 'package:kj_amongus/constants/const.dart';
 import 'package:kj_amongus/constants/fake_tasks.dart';
 import 'package:kj_amongus/data/models/player/player.dart';
 import 'package:kj_amongus/services/functions/sabotate_engines.dart';
-import 'package:kj_amongus/services/player_service.dart';
+import 'package:kj_amongus/services/firestore/player_service.dart';
 import 'package:kj_amongus/views/player/player_qr_view.dart';
 import 'package:kj_amongus/widgets/sabotage_widget.dart';
 

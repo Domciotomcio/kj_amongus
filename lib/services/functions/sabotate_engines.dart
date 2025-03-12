@@ -1,5 +1,5 @@
 import 'package:kj_amongus/data/models/game_state/game_state.dart';
-import 'package:kj_amongus/services/game_service.dart';
+import 'package:kj_amongus/services/firestore/game_service.dart';
 
 Future<bool> sabotateEngines() async {
   final GameService gameService = GameService();

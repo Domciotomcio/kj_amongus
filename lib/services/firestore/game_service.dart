@@ -7,7 +7,7 @@ import 'package:kj_amongus/data/models/game_state/game_state.dart';
 import 'package:kj_amongus/data/models/task/task.dart';
 import 'package:kj_amongus/services/functions/assign_fraction.dart';
 import 'package:kj_amongus/services/functions/assign_tasks.dart';
-import 'package:kj_amongus/services/player_service.dart';
+import 'package:kj_amongus/services/firestore/player_service.dart';
 
 class GameService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
