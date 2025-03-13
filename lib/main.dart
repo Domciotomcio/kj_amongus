@@ -44,12 +44,21 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber)),
       themeMode: ThemeMode.dark,
       darkTheme: ThemeData(
-          brightness: Brightness.dark,
-          useMaterial3: true,
-          //fontFamily: 'The Godfather',
-          fontFamily: GoogleFonts.lora().fontFamily,
-          colorScheme: ColorScheme.fromSeed(
-              seedColor: Colors.amber, brightness: Brightness.dark)),
+        brightness: Brightness.dark,
+        useMaterial3: true,
+        //fontFamily: 'The Godfather',
+        fontFamily: GoogleFonts.lora().fontFamily,
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 255, 7, 7),
+            brightness: Brightness.dark),
+      ).copyWith(
+        appBarTheme: const AppBarTheme(
+          titleTextStyle: TextStyle(
+            fontFamily: 'The Godfather',
+            fontSize: 30,
+          ),
+        ),
+      ),
       // darkTheme: ThemeData(
       //     //colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       //     brightness: Brightness.dark,
@@ -83,9 +92,9 @@ class MyApp extends StatelessWidget {
       // home: MyHomePage(title: "Title"),
       // home: PlayerImpostorView(),
       // home: PlayerEmergencyMeetingSummaryView(),
-      // home: LoginView(),
+      home: LoginView(),
       // home: PlayerView(),
-      home: AdminView(),
+      // home: AdminView(),
     );
   }
 }

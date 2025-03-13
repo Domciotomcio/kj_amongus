@@ -40,9 +40,10 @@ class TeamController {
 
     // get random task from tasksTemplatesList
     final List<TaskTemplate> allTasksTemplates = List.from(tasksTemplatesList);
-    allTasksTemplates.shuffle();
 
     for (int i = 0; i < teams.length; i++) {
+      allTasksTemplates.shuffle();
+
       var team = teams[i];
 
       for (int j = 0; j < tasksNumber; j++) {

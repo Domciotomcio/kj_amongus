@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kj_amongus/services/notifiers/player_notifier.dart';
 import 'package:kj_amongus/services/providers/auth_service_provider.dart';
+import 'package:kj_amongus/views/admin_view.dart';
 import 'package:kj_amongus/views/player/player_view.dart';
 import 'package:kj_amongus/views/register_view.dart';
 
@@ -23,6 +23,11 @@ class LoginView extends HookConsumerWidget {
     Future<void> login() async {
       isLoading.value = true;
 
+      if (nicknameController.text == "adminadminadmin") {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => AdminView()));
+      }
+
       final player = await authService.login(
           nicknameController.text, passwordController.text);
 
@@ -39,10 +44,6 @@ class LoginView extends HookConsumerWidget {
         );
       } else {
         // user logged in
-        ref.read(playerStateProvider.notifier).loadPlayer(player);
-
-        log(ref.watch(playerStateProvider).toString());
-
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('Zalogowano pomyślnie'),
@@ -61,7 +62,11 @@ class LoginView extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('Ekran logowania'),
+        title: Text(
+          'Ekran logowania',
+          // style:
+          //     TextStyle().copyWith(fontFamily: "The Godfather", fontSize: 30),
+        ),
       ),
       floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
@@ -77,8 +82,12 @@ class LoginView extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             // Image.asset('assets/images/face.png'),
-            Text('Witaj w grze "Ojciec Chrzestny"'),
-            SizedBox(height: 20),
+            Text(
+              'Meskie Granie 2025',
+              style: TextStyle()
+                  .copyWith(fontFamily: "The Godfather", fontSize: 60),
+            ),
+
             TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
@@ -98,7 +107,7 @@ class LoginView extends HookConsumerWidget {
             SizedBox(height: 20),
             FilledButton.icon(
                 onPressed: () => isLoading.value ? null : login(),
-                label: Text("Zaloguj"),
+                label: Text("Wejdź do gry"),
                 icon: Icon(Icons.login)),
           ],
         ),

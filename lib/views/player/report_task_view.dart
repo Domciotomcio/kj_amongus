@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kj_amongus/data/models/player/player.dart';
+import 'package:kj_amongus/services/firestore/player_service.dart';
+import 'package:kj_amongus/services/firestore/team_service.dart';
+import 'package:kj_amongus/services/providers/player_service_provider.dart';
+import 'package:kj_amongus/services/providers/player_state_provider.dart';
+import 'package:kj_amongus/services/providers/team_service_provider.dart';
 
 class ReportTaskView extends HookConsumerWidget {
   const ReportTaskView({super.key});
@@ -8,6 +14,9 @@ class ReportTaskView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final taskCodeController = useTextEditingController();
+
+    final TeamService teamService = ref.watch(teamServiceProvider);
+    final playerState = ref.watch(playerStateProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -30,7 +39,27 @@ class ReportTaskView extends HookConsumerWidget {
             ),
             SizedBox(height: 20),
             ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: () async {
+                final player = playerState.value;
+                if (player != null) {
+                  final success = await teamService.toggleTask(
+                      player.teamId!, taskCodeController.text);
+                  if (success) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('Zadanie zostało zgłoszone'),
+                      backgroundColor: Colors.green,
+                    ));
+                    Navigator.of(context).pop();
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Nie udało się zgłosić zadania'),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  }
+                }
+              },
               icon: const Icon(Icons.check),
               label: const Text('Zgłoś zadanie'),
             ),

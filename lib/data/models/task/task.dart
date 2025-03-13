@@ -27,4 +27,8 @@ class Task with _$Task {
       isDone: false,
     );
   }
+
+  Task toggleDone() {
+    return copyWith(isDone: !isDone);
+  }
 }
