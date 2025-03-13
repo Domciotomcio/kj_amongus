@@ -1,23 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'task_template.dart';
+part of 'team.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$TaskTemplateImpl _$$TaskTemplateImplFromJson(Map<String, dynamic> json) =>
-    _$TaskTemplateImpl(
+_$TeamImpl _$$TeamImplFromJson(Map<String, dynamic> json) => _$TeamImpl(
       id: json['id'] as String,
-      key: json['key'] as String,
       name: json['name'] as String,
-      description: json['description'] as String,
+      tasks: (json['tasks'] as List<dynamic>)
+          .map((e) => Task.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
-Map<String, dynamic> _$$TaskTemplateImplToJson(_$TaskTemplateImpl instance) =>
+Map<String, dynamic> _$$TeamImplToJson(_$TeamImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'key': instance.key,
       'name': instance.name,
-      'description': instance.description,
+      'tasks': instance.tasks,
     };

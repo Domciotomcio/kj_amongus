@@ -18,37 +18,37 @@ class PlayerTestView extends StatelessWidget {
             Text(
               'Player Test View',
             ),
-            Expanded(
-              child: StreamBuilder(
-                  stream: playerService.getPlayersStream(),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return CircularProgressIndicator(); // Show loading indicator
-                    }
-                    if (snapshot.hasError) {
-                      return Text('Error: ${snapshot.error}');
-                    }
-                    if (snapshot.hasData) {
-                      final players = snapshot.data as List<Player>;
-                      return ListView.builder(
-                        itemCount: players.length,
-                        itemBuilder: (context, index) {
-                          final player = players[index];
-                          return ListTile(
-                            title: Text(
-                                "${player.nickname} ${player.name} ${player.id}"),
-                            subtitle: Text(player.tasks.toString()),
-                            trailing: player.fraction != null
-                                ? Text(player.fraction!.name)
-                                : null,
-                          );
-                        },
-                      );
-                    } else {
-                      return Text("Idk what happened");
-                    }
-                  }),
-            ),
+            // Expanded(
+            //   child: StreamBuilder(
+            //       stream: playerService.getPlayersStream(),
+            //       builder: (context, snapshot) {
+            //         if (snapshot.connectionState == ConnectionState.waiting) {
+            //           return CircularProgressIndicator(); // Show loading indicator
+            //         }
+            //         if (snapshot.hasError) {
+            //           return Text('Error: ${snapshot.error}');
+            //         }
+            //         if (snapshot.hasData) {
+            //           final players = snapshot.data as List<Player>;
+            //           return ListView.builder(
+            //             itemCount: players.length,
+            //             itemBuilder: (context, index) {
+            //               final player = players[index];
+            //               return ListTile(
+            //                 title: Text(
+            //                     "${player.nickname} ${player.name} ${player.id}"),
+            //                 subtitle: Text(player.tasks.toString()),
+            //                 trailing: player.fraction != null
+            //                     ? Text(player.fraction!.name)
+            //                     : null,
+            //               );
+            //             },
+            //           );
+            //         } else {
+            //           return Text("Idk what happened");
+            //         }
+            //       }),
+            // ),
             FilledButton(
                 onPressed: () {
                   // add player to firebase

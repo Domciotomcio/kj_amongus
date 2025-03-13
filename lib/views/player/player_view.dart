@@ -8,6 +8,7 @@ import 'package:kj_amongus/services/firestore/player_service.dart';
 import 'package:kj_amongus/services/providers/game_state_provider.dart';
 import 'package:kj_amongus/services/providers/player_service_provider.dart';
 import 'package:kj_amongus/views/login_view.dart';
+import 'package:kj_amongus/views/player/map_view.dart';
 import 'package:kj_amongus/views/player/report_task_view.dart';
 
 class PlayerView extends HookConsumerWidget {
@@ -15,6 +16,8 @@ class PlayerView extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final playerId = "Domcio";
+
     final PlayerService playerService = ref.watch(playerServiceProvider);
     final gameState = ref.watch(gameStateProvider);
 
@@ -30,7 +33,11 @@ class PlayerView extends HookConsumerWidget {
                     MaterialPageRoute(builder: (context) => LoginView()),
                     (route) => false);
               },
-              icon: Icon(Icons.logout))
+              icon: Icon(Icons.logout)),
+          IconButton(
+              onPressed: () => Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => MapView())),
+              icon: Icon(Icons.map)),
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -46,7 +53,11 @@ class PlayerView extends HookConsumerWidget {
           case GameState.lobby:
             return Center(child: Text("Czekaj na rozpoczęcie gry"));
           case GameState.game:
-            return Center(child: Text("Gra trwa"));
+            return playerData(Player(
+                id: "Domcio",
+                nickname: "Domcio",
+                password: "1234",
+                name: "Dominik"));
           case GameState.gameOver:
             return Center(child: Text("Gra zakończona"));
           default:

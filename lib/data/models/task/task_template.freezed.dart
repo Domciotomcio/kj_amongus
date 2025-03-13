@@ -21,6 +21,7 @@ TaskTemplate _$TaskTemplateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TaskTemplate {
   String get id => throw _privateConstructorUsedError;
+  String get key => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
 
@@ -40,7 +41,7 @@ abstract class $TaskTemplateCopyWith<$Res> {
           TaskTemplate value, $Res Function(TaskTemplate) then) =
       _$TaskTemplateCopyWithImpl<$Res, TaskTemplate>;
   @useResult
-  $Res call({String id, String name, String description});
+  $Res call({String id, String key, String name, String description});
 }
 
 /// @nodoc
@@ -59,6 +60,7 @@ class _$TaskTemplateCopyWithImpl<$Res, $Val extends TaskTemplate>
   @override
   $Res call({
     Object? id = null,
+    Object? key = null,
     Object? name = null,
     Object? description = null,
   }) {
@@ -66,6 +68,10 @@ class _$TaskTemplateCopyWithImpl<$Res, $Val extends TaskTemplate>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      key: null == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -87,7 +93,7 @@ abstract class _$$TaskTemplateImplCopyWith<$Res>
       __$$TaskTemplateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String description});
+  $Res call({String id, String key, String name, String description});
 }
 
 /// @nodoc
@@ -104,6 +110,7 @@ class __$$TaskTemplateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? key = null,
     Object? name = null,
     Object? description = null,
   }) {
@@ -111,6 +118,10 @@ class __$$TaskTemplateImplCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      key: null == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -128,7 +139,10 @@ class __$$TaskTemplateImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TaskTemplateImpl implements _TaskTemplate {
   const _$TaskTemplateImpl(
-      {required this.id, required this.name, required this.description});
+      {required this.id,
+      required this.key,
+      required this.name,
+      required this.description});
 
   factory _$TaskTemplateImpl.fromJson(Map<String, dynamic> json) =>
       _$$TaskTemplateImplFromJson(json);
@@ -136,13 +150,15 @@ class _$TaskTemplateImpl implements _TaskTemplate {
   @override
   final String id;
   @override
+  final String key;
+  @override
   final String name;
   @override
   final String description;
 
   @override
   String toString() {
-    return 'TaskTemplate(id: $id, name: $name, description: $description)';
+    return 'TaskTemplate(id: $id, key: $key, name: $name, description: $description)';
   }
 
   @override
@@ -151,6 +167,7 @@ class _$TaskTemplateImpl implements _TaskTemplate {
         (other.runtimeType == runtimeType &&
             other is _$TaskTemplateImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.key, key) || other.key == key) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description));
@@ -158,7 +175,7 @@ class _$TaskTemplateImpl implements _TaskTemplate {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, description);
+  int get hashCode => Object.hash(runtimeType, id, key, name, description);
 
   /// Create a copy of TaskTemplate
   /// with the given fields replaced by the non-null parameter values.
@@ -179,6 +196,7 @@ class _$TaskTemplateImpl implements _TaskTemplate {
 abstract class _TaskTemplate implements TaskTemplate {
   const factory _TaskTemplate(
       {required final String id,
+      required final String key,
       required final String name,
       required final String description}) = _$TaskTemplateImpl;
 
@@ -187,6 +205,8 @@ abstract class _TaskTemplate implements TaskTemplate {
 
   @override
   String get id;
+  @override
+  String get key;
   @override
   String get name;
   @override

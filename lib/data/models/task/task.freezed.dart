@@ -21,6 +21,7 @@ Task _$TaskFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Task {
   String get id => throw _privateConstructorUsedError;
+  String get key => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
   bool get isDone => throw _privateConstructorUsedError;
@@ -39,7 +40,8 @@ abstract class $TaskCopyWith<$Res> {
   factory $TaskCopyWith(Task value, $Res Function(Task) then) =
       _$TaskCopyWithImpl<$Res, Task>;
   @useResult
-  $Res call({String id, String name, String description, bool isDone});
+  $Res call(
+      {String id, String key, String name, String description, bool isDone});
 }
 
 /// @nodoc
@@ -58,6 +60,7 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
   @override
   $Res call({
     Object? id = null,
+    Object? key = null,
     Object? name = null,
     Object? description = null,
     Object? isDone = null,
@@ -66,6 +69,10 @@ class _$TaskCopyWithImpl<$Res, $Val extends Task>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      key: null == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -90,7 +97,8 @@ abstract class _$$TaskImplCopyWith<$Res> implements $TaskCopyWith<$Res> {
       __$$TaskImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String description, bool isDone});
+  $Res call(
+      {String id, String key, String name, String description, bool isDone});
 }
 
 /// @nodoc
@@ -106,6 +114,7 @@ class __$$TaskImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? key = null,
     Object? name = null,
     Object? description = null,
     Object? isDone = null,
@@ -114,6 +123,10 @@ class __$$TaskImplCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      key: null == key
+          ? _value.key
+          : key // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
           ? _value.name
@@ -136,6 +149,7 @@ class __$$TaskImplCopyWithImpl<$Res>
 class _$TaskImpl extends _Task {
   const _$TaskImpl(
       {required this.id,
+      required this.key,
       required this.name,
       required this.description,
       required this.isDone})
@@ -147,6 +161,8 @@ class _$TaskImpl extends _Task {
   @override
   final String id;
   @override
+  final String key;
+  @override
   final String name;
   @override
   final String description;
@@ -155,7 +171,7 @@ class _$TaskImpl extends _Task {
 
   @override
   String toString() {
-    return 'Task(id: $id, name: $name, description: $description, isDone: $isDone)';
+    return 'Task(id: $id, key: $key, name: $name, description: $description, isDone: $isDone)';
   }
 
   @override
@@ -164,6 +180,7 @@ class _$TaskImpl extends _Task {
         (other.runtimeType == runtimeType &&
             other is _$TaskImpl &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.key, key) || other.key == key) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
                 other.description == description) &&
@@ -172,7 +189,8 @@ class _$TaskImpl extends _Task {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, description, isDone);
+  int get hashCode =>
+      Object.hash(runtimeType, id, key, name, description, isDone);
 
   /// Create a copy of Task
   /// with the given fields replaced by the non-null parameter values.
@@ -193,6 +211,7 @@ class _$TaskImpl extends _Task {
 abstract class _Task extends Task {
   const factory _Task(
       {required final String id,
+      required final String key,
       required final String name,
       required final String description,
       required final bool isDone}) = _$TaskImpl;
@@ -202,6 +221,8 @@ abstract class _Task extends Task {
 
   @override
   String get id;
+  @override
+  String get key;
   @override
   String get name;
   @override

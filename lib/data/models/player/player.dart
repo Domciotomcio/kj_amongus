@@ -14,6 +14,7 @@ class Player with _$Player {
     required String nickname,
     required String password,
     required String name,
+    String? teamId,
     Fraction? fraction,
     List<Task>? tasks,
     bool? isAlive,

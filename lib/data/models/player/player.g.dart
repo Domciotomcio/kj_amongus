@@ -11,6 +11,7 @@ _$PlayerImpl _$$PlayerImplFromJson(Map<String, dynamic> json) => _$PlayerImpl(
       nickname: json['nickname'] as String,
       password: json['password'] as String,
       name: json['name'] as String,
+      teamId: json['teamId'] as String?,
       fraction: $enumDecodeNullable(_$FractionEnumMap, json['fraction']),
       tasks: (json['tasks'] as List<dynamic>?)
           ?.map((e) => Task.fromJson(e as Map<String, dynamic>))
@@ -27,6 +28,7 @@ Map<String, dynamic> _$$PlayerImplToJson(_$PlayerImpl instance) =>
       'nickname': instance.nickname,
       'password': instance.password,
       'name': instance.name,
+      'teamId': instance.teamId,
       'fraction': _$FractionEnumMap[instance.fraction],
       'tasks': instance.tasks,
       'isAlive': instance.isAlive,

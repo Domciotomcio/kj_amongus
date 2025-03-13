@@ -7,6 +7,7 @@ part 'task_template.g.dart';
 class TaskTemplate with _$TaskTemplate {
   const factory TaskTemplate({
     required String id,
+    required String key,
     required String name,
     required String description,
   }) = _TaskTemplate;

@@ -24,6 +24,7 @@ mixin _$Player {
   String get nickname => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
+  String? get teamId => throw _privateConstructorUsedError;
   Fraction? get fraction => throw _privateConstructorUsedError;
   List<Task>? get tasks => throw _privateConstructorUsedError;
   bool? get isAlive => throw _privateConstructorUsedError;
@@ -50,6 +51,7 @@ abstract class $PlayerCopyWith<$Res> {
       String nickname,
       String password,
       String name,
+      String? teamId,
       Fraction? fraction,
       List<Task>? tasks,
       bool? isAlive,
@@ -76,6 +78,7 @@ class _$PlayerCopyWithImpl<$Res, $Val extends Player>
     Object? nickname = null,
     Object? password = null,
     Object? name = null,
+    Object? teamId = freezed,
     Object? fraction = freezed,
     Object? tasks = freezed,
     Object? isAlive = freezed,
@@ -99,6 +102,10 @@ class _$PlayerCopyWithImpl<$Res, $Val extends Player>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      teamId: freezed == teamId
+          ? _value.teamId
+          : teamId // ignore: cast_nullable_to_non_nullable
+              as String?,
       fraction: freezed == fraction
           ? _value.fraction
           : fraction // ignore: cast_nullable_to_non_nullable
@@ -135,6 +142,7 @@ abstract class _$$PlayerImplCopyWith<$Res> implements $PlayerCopyWith<$Res> {
       String nickname,
       String password,
       String name,
+      String? teamId,
       Fraction? fraction,
       List<Task>? tasks,
       bool? isAlive,
@@ -159,6 +167,7 @@ class __$$PlayerImplCopyWithImpl<$Res>
     Object? nickname = null,
     Object? password = null,
     Object? name = null,
+    Object? teamId = freezed,
     Object? fraction = freezed,
     Object? tasks = freezed,
     Object? isAlive = freezed,
@@ -182,6 +191,10 @@ class __$$PlayerImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      teamId: freezed == teamId
+          ? _value.teamId
+          : teamId // ignore: cast_nullable_to_non_nullable
+              as String?,
       fraction: freezed == fraction
           ? _value.fraction
           : fraction // ignore: cast_nullable_to_non_nullable
@@ -214,6 +227,7 @@ class _$PlayerImpl extends _Player {
       required this.nickname,
       required this.password,
       required this.name,
+      this.teamId,
       this.fraction,
       final List<Task>? tasks,
       this.isAlive,
@@ -233,6 +247,8 @@ class _$PlayerImpl extends _Player {
   final String password;
   @override
   final String name;
+  @override
+  final String? teamId;
   @override
   final Fraction? fraction;
   final List<Task>? _tasks;
@@ -255,7 +271,7 @@ class _$PlayerImpl extends _Player {
 
   @override
   String toString() {
-    return 'Player(id: $id, nickname: $nickname, password: $password, name: $name, fraction: $fraction, tasks: $tasks, isAlive: $isAlive, votesNumber: $votesNumber, lastKillTimestamp: $lastKillTimestamp)';
+    return 'Player(id: $id, nickname: $nickname, password: $password, name: $name, teamId: $teamId, fraction: $fraction, tasks: $tasks, isAlive: $isAlive, votesNumber: $votesNumber, lastKillTimestamp: $lastKillTimestamp)';
   }
 
   @override
@@ -269,6 +285,7 @@ class _$PlayerImpl extends _Player {
             (identical(other.password, password) ||
                 other.password == password) &&
             (identical(other.name, name) || other.name == name) &&
+            (identical(other.teamId, teamId) || other.teamId == teamId) &&
             (identical(other.fraction, fraction) ||
                 other.fraction == fraction) &&
             const DeepCollectionEquality().equals(other._tasks, _tasks) &&
@@ -287,6 +304,7 @@ class _$PlayerImpl extends _Player {
       nickname,
       password,
       name,
+      teamId,
       fraction,
       const DeepCollectionEquality().hash(_tasks),
       isAlive,
@@ -315,6 +333,7 @@ abstract class _Player extends Player {
       required final String nickname,
       required final String password,
       required final String name,
+      final String? teamId,
       final Fraction? fraction,
       final List<Task>? tasks,
       final bool? isAlive,
@@ -332,6 +351,8 @@ abstract class _Player extends Player {
   String get password;
   @override
   String get name;
+  @override
+  String? get teamId;
   @override
   Fraction? get fraction;
   @override

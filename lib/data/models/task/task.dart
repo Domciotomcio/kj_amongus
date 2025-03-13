@@ -8,6 +8,7 @@ part 'task.g.dart';
 class Task with _$Task {
   const factory Task({
     required String id,
+    required String key,
     required String name,
     required String description,
     required bool isDone,
@@ -20,6 +21,7 @@ class Task with _$Task {
   factory Task.fromTemplate(TaskTemplate template) {
     return Task(
       id: template.id,
+      key: template.key,
       name: template.name,
       description: template.description,
       isDone: false,

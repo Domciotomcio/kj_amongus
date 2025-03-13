@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kj_amongus/firebase_options.dart';
+import 'package:kj_amongus/views/admin_view.dart';
 import 'package:kj_amongus/views/game_manager/game_manager_view.dart';
 import 'package:kj_amongus/views/login_view.dart';
 import 'package:kj_amongus/views/player/emergency_meeting/player_emergency_meeting_summary_view.dart';
@@ -83,7 +84,8 @@ class MyApp extends StatelessWidget {
       // home: PlayerImpostorView(),
       // home: PlayerEmergencyMeetingSummaryView(),
       // home: LoginView(),
-      home: PlayerView(),
+      // home: PlayerView(),
+      home: AdminView(),
     );
   }
 }

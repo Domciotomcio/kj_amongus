@@ -74,6 +74,14 @@ class PlayerService {
     });
   }
 
+  Stream<List<Player>> streamPlayers() {
+    return _firestore.collection('players').snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) {
+        return Player.fromJson(doc.data());
+      }).toList();
+    });
+  }
+
   Future<List<Player>> getPlayers() async {
     final players = await _firestore.collection('players').get();
     return players.docs.map((doc) {
@@ -136,6 +144,7 @@ class PlayerService {
       List<Task> tasks = selectedTemplates
           .map((e) => Task(
               id: Uuid().v4(),
+              key: e.key,
               name: e.name,
               description: e.description,
               isDone: false))
