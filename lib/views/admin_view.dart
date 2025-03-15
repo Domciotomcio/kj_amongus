@@ -3,9 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kj_amongus/controllers/team_controller.dart';
+import 'package:kj_amongus/data/models/game_state/game_state.dart';
 import 'package:kj_amongus/data/models/player/player.dart';
+import 'package:kj_amongus/services/firestore/game_state_service.dart';
 import 'package:kj_amongus/services/firestore/player_service.dart';
 import 'package:kj_amongus/services/firestore/team_service.dart';
+import 'package:kj_amongus/services/providers/game_state_service_provider.dart';
 import 'package:kj_amongus/services/providers/player_service_provider.dart';
 import 'package:kj_amongus/services/providers/team_controller_provider.dart';
 
@@ -15,6 +18,8 @@ class AdminView extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final PlayerService playerService = ref.watch(playerServiceProvider);
+    final GameStateService gameStateService =
+        ref.watch(gameStateServiceProvider);
     final TeamController teamController = ref.watch(teamControllerProvider);
 
     final TeamService teamService = TeamService();
@@ -41,21 +46,25 @@ class AdminView extends HookConsumerWidget {
                     }
                     if (snapshot.hasData) {
                       final players = snapshot.data as List<Player>;
-                      return ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: players.length,
-                        itemBuilder: (context, index) {
-                          final player = players[index];
-                          return ListTile(
-                            title: Text(
-                                "${player.nickname} ${player.name} ${player.id}"),
-                            subtitle: Text(player.tasks.toString()),
-                            trailing: player.fraction != null
-                                ? Text(player.fraction!.name)
-                                : null,
-                          );
-                        },
+                      return Column(
+                        children: [
+                          Text("Liczba graczy: ${players.length}"),
+                          ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: players.length,
+                            itemBuilder: (context, index) {
+                              final player = players[index];
+                              return ListTile(
+                                title: Text(player.nickname),
+                                subtitle: Text(player.name),
+                                trailing: player.fraction != null
+                                    ? Text(player.fraction!.name)
+                                    : null,
+                              );
+                            },
+                          ),
+                        ],
                       );
                     } else {
                       return Text("Idk what happened");
@@ -92,6 +101,11 @@ class AdminView extends HookConsumerWidget {
                   child: Text("Dodaj i przypisz teamy do graczy")),
               Divider(),
               Text('Postępy zadań'),
+              Divider(),
+              ElevatedButton(
+                  onPressed: () =>
+                      gameStateService.updateGameState(GameState.game),
+                  child: Text("Rozpocznij grę")),
             ],
           ),
         ));

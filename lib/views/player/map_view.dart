@@ -9,8 +9,20 @@ class MapView extends StatelessWidget {
       appBar: AppBar(
         title: Text('Mapa'),
       ),
-      body: Center(
-        child: Text('Map View'),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            ClipRRect(
+                borderRadius: BorderRadius.circular(16.0),
+                child: Image.asset('assets/images/floor1.png')),
+            SizedBox(height: 16.0),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16.0),
+              child: Image.asset('assets/images/floor2.png'),
+            ),
+          ],
+        ),
       ),
     );
   }

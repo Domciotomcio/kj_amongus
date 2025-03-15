@@ -9,9 +9,14 @@ class GameStateService {
       firestore.doc('games/game_state').withConverter(
           fromFirestore: (snapshot, _) =>
               GameState.values.byName(snapshot.data()!['state']),
-          toFirestore: (state, _) => {'state': state.index});
+          toFirestore: (state, _) => {'state': state.name});
 
   Stream<GameState> streamGameState() async* {
     yield* gameStateDoc.snapshots().map((snapshot) => snapshot.data()!);
+  }
+
+  Future<void> updateGameState(GameState state) async {
+    log('Updating game state: ${state.toString()}');
+    await gameStateDoc.set(state);
   }
 }

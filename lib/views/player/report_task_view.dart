@@ -11,6 +11,8 @@ import 'package:kj_amongus/services/providers/team_service_provider.dart';
 class ReportTaskView extends HookConsumerWidget {
   const ReportTaskView({super.key});
 
+  
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final taskCodeController = useTextEditingController();

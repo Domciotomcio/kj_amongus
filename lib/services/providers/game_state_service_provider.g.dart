@@ -1,26 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'team_state_provider.dart';
+part of 'game_state_service_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$teamStateHash() => r'fa7ab9e91bb410a617c9c661e503eda797155f6e';
+String _$gameStateServiceHash() => r'b6bdbfe7eac4776e7370072afeae9a7778f58523';
 
-/// See also [teamState].
-@ProviderFor(teamState)
-final teamStateProvider = AutoDisposeStreamProvider<Team>.internal(
-  teamState,
-  name: r'teamStateProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$teamStateHash,
+/// See also [gameStateService].
+@ProviderFor(gameStateService)
+final gameStateServiceProvider = AutoDisposeProvider<GameStateService>.internal(
+  gameStateService,
+  name: r'gameStateServiceProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$gameStateServiceHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-typedef TeamStateRef = AutoDisposeStreamProviderRef<Team>;
+typedef GameStateServiceRef = AutoDisposeProviderRef<GameStateService>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

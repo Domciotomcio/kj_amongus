@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kj_amongus/services/notifiers/player_state_notifier.dart';
 import 'package:kj_amongus/services/providers/auth_service_provider.dart';
 import 'package:kj_amongus/views/admin_view.dart';
 import 'package:kj_amongus/views/player/player_view.dart';
@@ -43,6 +44,11 @@ class LoginView extends HookConsumerWidget {
           ),
         );
       } else {
+        ref.read(playerStateNotifierProvider.notifier).updatePlayer(player);
+
+        final playerState = ref.watch(playerStateNotifierProvider);
+        log(playerState.toString());
+
         // user logged in
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
